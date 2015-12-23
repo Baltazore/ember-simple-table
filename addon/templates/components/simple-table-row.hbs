@@ -1,0 +1,7 @@
+{{#each attrs.keys as |dataKey| }}
+    {{#if isHeader}}
+        {{simple-table-cell data=attrs.rowData dataKey=dataKey tagName="th"}}
+    {{else}}
+        {{simple-table-cell data=attrs.rowData dataKey=dataKey tagName="td"}}
+    {{/if}}
+{{/each}}

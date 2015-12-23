@@ -1,0 +1,9 @@
+<thead>
+    {{simple-table-row rowData=headerRow keys=columns isHeader=true}}
+</thead>
+
+<tbody>
+    {{#each bodyRows as |rowData| }}
+        {{simple-table-row rowData=rowData keys=columns}}
+    {{/each}}
+</tbody>
