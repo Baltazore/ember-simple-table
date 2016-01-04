@@ -2,6 +2,6 @@
     {{yield}}
 {{else}}
     {{#each attrs.keys as |dataKey| }}
-        {{simple-table-cell data=attrs.rowData dataKey=dataKey}}
+        {{simple-table-cell data=attrs.rowData dataKey=dataKey sortBy=attrs.sortBy}}
     {{/each}}
 {{/if}}

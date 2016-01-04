@@ -33,7 +33,7 @@ export default Ember.Component.extend({
 
   actions: {
     sortBy(sortingCriteria) {
-      this.set('sortingCriteria', sortingCriteria);
+      this.set('sortingCriteria', [sortingCriteria]);
     }
   }
 
