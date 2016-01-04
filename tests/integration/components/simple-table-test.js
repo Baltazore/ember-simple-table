@@ -7,7 +7,7 @@ moduleForComponent('simple-table', 'Integration | Component | simple table', {
 
 test('it renders with simple data', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
+  // Handle any actions with this.on('myAction', function(val) { ... });
 
   this.set('tableData', [{ foo: 'bar', baz: 'boo' }]);
   this.set('tableColumns', ['baz', 'foo']);
@@ -28,4 +28,19 @@ test('it renders with simple data', function(assert) {
   assert.equal(this.$('td').length, 2, 'Creates table cell');
   assert.equal(this.$('td:first').text().trim(), 'boo');
   assert.equal(this.$('td:last').text().trim(), 'bar');
+});
+
+test('it renders with simple data', function(assert) {
+  // Set any properties with this.set('myProperty', 'value');
+  // Handle any actions with this.on('myAction', function(val) { ... });
+
+  this.set('tableData', [{ foo: 'bar', baz: 'boo' }]);
+  this.set('tableColumns', ['baz', 'foo']);
+
+  this.render(hbs`
+    {{#simple-table tableData=tableData tableColumns=tableColumns}}
+    {{/simple-table}}
+  `);
+
+  assert.equal(this.$('table').length, 1);
 });

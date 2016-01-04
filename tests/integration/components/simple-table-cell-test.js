@@ -11,8 +11,8 @@ test('it renders', function(assert) {
 
   this.set('data', { foo: 'bar' });
   this.set('dataKey', 'foo');
-  this.render(hbs`{{simple-table-cell data=data dataKey=dataKey tagName="td"}}`);
+  this.render(hbs`{{simple-table-cell data=data dataKey=dataKey}}`);
 
   assert.equal(this.$().text().trim(), 'bar');
-  assert.equal(this.$('td').length, 1, 'Creates 1 cell');
+  assert.equal(this.$('th').length, 1, 'Creates 1 cell');
 });

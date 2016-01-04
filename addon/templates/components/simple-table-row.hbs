@@ -1,7 +1,7 @@
-{{#each attrs.keys as |dataKey| }}
-    {{#if isHeader}}
-        {{simple-table-cell data=attrs.rowData dataKey=dataKey tagName="th"}}
-    {{else}}
-        {{simple-table-cell data=attrs.rowData dataKey=dataKey tagName="td"}}
-    {{/if}}
-{{/each}}
+{{#if hasBlock}}
+    {{yield}}
+{{else}}
+    {{#each attrs.keys as |dataKey| }}
+        <td>{{get attrs.rowData dataKey}}</td>
+    {{/each}}
+{{/if}}
