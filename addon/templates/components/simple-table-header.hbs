@@ -1,0 +1,7 @@
+{{#if hasBlock}}
+    {{yield}}
+{{else}}
+    {{#each attrs.keys as |dataKey| }}
+        {{simple-table-cell data=attrs.rowData dataKey=dataKey}}
+    {{/each}}
+{{/if}}
