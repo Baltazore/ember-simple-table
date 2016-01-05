@@ -1,13 +1,6 @@
-<thead>
-    {{simple-table-header rowData=headerRow keys=columns sortBy=(action 'sortBy')}}
-</thead>
-
-<tbody>
-    {{#each bodyRows as |rowData| }}
-        {{#if hasBlock}}
-            {{yield rowData}}
-        {{else}}
-            {{simple-table-row rowData=rowData keys=columns}}
-        {{/if}}
-    {{/each}}
-</tbody>
+{{#if hasBlock}}
+    {{yield table}}
+{{else}}
+    {{simple-table-header table=table }}
+    {{simple-table-body table=table}}
+{{/if}}

@@ -3,6 +3,24 @@ import layout from '../templates/components/simple-table-header';
 
 export default Ember.Component.extend({
   layout,
+  tagName: 'thead',
 
-  tagName: 'tr'
+  didReceiveAttrs() {
+    let table = this.getAttr('table');
+
+    this.set('columns', table.columns);
+    this.set('sortBy', table.sortBy);
+    this._super(...arguments);
+  },
+
+  headerRow: Ember.computed('columns', {
+    get() {
+      return this.get('columns').reduce(
+        (headerRow, column) => {
+          headerRow[column] = Ember.String.capitalize(column);
+          return headerRow;
+        }, {}
+      );
+    }
+  })
 });

@@ -1,0 +1,11 @@
+{{#each rows as |rowData| }}
+    <tr>
+        {{#if hasBlock}}
+            {{yield rowData}}
+        {{else}}
+            {{#each columns as |column| }}
+                <td>{{get rowData column}}</td>
+            {{/each}}
+        {{/if}}
+    </tr>
+{{/each}}

@@ -11,10 +11,8 @@ export default Ember.Component.extend({
     let dataKey = this.getAttr('dataKey');
     let dataValue = data[dataKey];
 
-    this.set('sortingOrder', null);
-
-    this.set('dataKey', dataKey);
     this.set('dataValue', dataValue);
+    this.set('sortingOrder', null);
 
     this._super(...arguments);
   },
@@ -32,6 +30,6 @@ export default Ember.Component.extend({
 
   click() {
     this.toggleSortingOrder();
-    this.attrs.sortBy(`${this.get('dataKey')}:${this.get('sortingOrder')}`);
+    this.attrs.sortBy(`${this.getAttr('dataKey')}:${this.get('sortingOrder')}`);
   }
 });

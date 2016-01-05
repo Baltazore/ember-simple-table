@@ -1,6 +1,11 @@
-{{#simple-table tableData=model.tableData tableColumns=model.tableColumns as |tableRow| }}
-    <tr>
-        <td> {{ tableRow.foo }} </td>
-        <td> {{ tableRow.baz }} </td>
-    </tr>
+<h2>Simple Table</h2>
+
+{{simple-table tableData=model.tableData tableColumns=model.tableColumns}}
+
+<h2>Simple Table with {{yield}} for header and rows</h2>
+
+{{#simple-table tableData=model.tableData tableColumns=model.tableColumns as |table|}}
+    {{simple-table-header table=table}}
+
+    {{simple-table-body table=table}}
 {{/simple-table}}

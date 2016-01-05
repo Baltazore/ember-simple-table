@@ -1,3 +1,9 @@
-{{#each attrs.keys as |dataKey| }}
-    {{simple-table-cell data=attrs.rowData dataKey=dataKey sortBy=attrs.sortBy}}
-{{/each}}
+{{#if hasBlock}}
+    {{yield}}
+{{else}}
+    <tr>
+        {{#each columns as |column| }}
+            {{simple-table-cell data=headerRow dataKey=column sortBy=(action sortBy)}}
+        {{/each}}
+    </tr>
+{{/if}}

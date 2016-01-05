@@ -38,11 +38,9 @@ test('it renders with simple data and yield table data', function(assert) {
   this.set('tableColumns', ['baz', 'foo']);
 
   this.render(hbs`
-    {{#simple-table tableData=tableData tableColumns=tableColumns as |tableRow| }}
-        <tr>
-            <td> {{ tableRow.baz }} </td>
-            <td> {{ tableRow.foo }} </td>
-        </tr>
+    {{#simple-table tableData=tableData tableColumns=tableColumns as |table| }}
+        {{simple-table-header table=table}}
+        {{simple-table-body table=table}}
     {{/simple-table}}
   `);
 
