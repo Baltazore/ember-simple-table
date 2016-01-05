@@ -17,16 +17,3 @@ test('renders for simple data header row with 2 cells', function(assert) {
   assert.equal(this.$('tr').length, 1, 'Creates 1 header row');
   assert.equal(this.$('th').length, 2, 'Creates 2 header cells');
 });
-
-test('it renders', function(assert) {
-  this.set('keys', ['foo', 'baz']);
-  this.set('rowData', { foo: 'bar', baz: 'boo' });
-
-  this.render(hbs`
-    {{#simple-table-header}}
-        template block text
-    {{/simple-table-header}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
-});

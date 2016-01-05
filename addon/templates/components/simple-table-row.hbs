@@ -1,7 +1,3 @@
-{{#if hasBlock}}
-    {{yield}}
-{{else}}
-    {{#each attrs.keys as |dataKey| }}
-        <td>{{get attrs.rowData dataKey}}</td>
-    {{/each}}
-{{/if}}
+{{#each attrs.keys as |dataKey| }}
+    <td>{{get attrs.rowData dataKey}}</td>
+{{/each}}
