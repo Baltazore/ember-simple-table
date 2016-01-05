@@ -4,6 +4,10 @@
 
 <tbody>
     {{#each bodyRows as |rowData| }}
-        {{simple-table-row rowData=rowData keys=columns}}
+        {{#if hasBlock}}
+            {{yield rowData}}
+        {{else}}
+            {{simple-table-row rowData=rowData keys=columns}}
+        {{/if}}
     {{/each}}
 </tbody>

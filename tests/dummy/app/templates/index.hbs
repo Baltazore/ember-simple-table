@@ -1,1 +1,6 @@
-{{ simple-table tableData=model.tableData tableColumns=model.tableColumns }}
+{{#simple-table tableData=model.tableData tableColumns=model.tableColumns as |tableRow| }}
+    <tr>
+        <td> {{ tableRow.foo }} </td>
+        <td> {{ tableRow.baz }} </td>
+    </tr>
+{{/simple-table}}
