@@ -9,9 +9,15 @@ export default Ember.Component.extend({
   didReceiveAttrs() {
     let data = this.getAttr('data');
     let dataKey = this.getAttr('dataKey');
-    let dataValue = data[dataKey];
+    let dataValue = this.getAttr('dataValue');
 
-    this.set('dataValue', dataValue);
+    if (data && dataKey) {
+      let dataValueComputed = data[dataKey];
+      this.set('dataValue', dataValueComputed);
+    } else if (dataValue) {
+      this.set('dataValue', dataValue);
+    }
+
     this.set('sortingOrder', null);
 
     this._super(...arguments);

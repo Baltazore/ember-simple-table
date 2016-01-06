@@ -4,8 +4,14 @@
 
 <h2>Simple Table with {{yield}} for header and rows</h2>
 
-{{#simple-table tableData=model.tableData tableColumns=model.tableColumns as |table|}}
-    {{simple-table-header table=table}}
+{{#simple-table tableData=model.tableData tableColumns=model.tableColumns sortAction=(action 'sort') as |table|}}
+    {{#simple-table-header table=table as |header|}}
+        {{simple-table-cell dataValue='Foo' dataKey='foo' sortBy=(action header.sortBy)}}
+        {{simple-table-cell dataValue='BaZ' dataKey='baz' sortBy=(action header.sortBy)}}
+    {{/simple-table-header}}
 
-    {{simple-table-body table=table}}
+    {{#simple-table-body table=table as |row|}}
+        <td>{{row.foo}}</td>
+        <td>{{row.baz}}</td>
+    {{/simple-table-body}}
 {{/simple-table}}

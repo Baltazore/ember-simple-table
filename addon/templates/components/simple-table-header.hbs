@@ -1,9 +1,9 @@
-{{#if hasBlock}}
-    {{yield}}
-{{else}}
-    <tr>
+<tr>
+    {{#if hasBlock}}
+        {{yield header}}
+    {{else}}
         {{#each columns as |column| }}
             {{simple-table-cell data=headerRow dataKey=column sortBy=(action sortBy)}}
         {{/each}}
-    </tr>
-{{/if}}
+    {{/if}}
+</tr>

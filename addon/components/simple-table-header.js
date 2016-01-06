@@ -22,5 +22,16 @@ export default Ember.Component.extend({
         }, {}
       );
     }
+  }),
+
+  header: Ember.computed('headerRow', 'columns', 'sortBy', {
+    get() {
+      return Ember.Object.create({
+        row: this.get('headerRow'),
+        columns: this.get('columns'),
+        sortBy: this.get('sortBy')
+      });
+    }
   })
+
 });
