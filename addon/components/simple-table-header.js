@@ -9,7 +9,6 @@ export default Ember.Component.extend({
     let table = this.getAttr('table');
 
     this.set('columns', table.columns);
-    this.set('sortBy', table.sortBy);
     this._super(...arguments);
   },
 
@@ -28,8 +27,7 @@ export default Ember.Component.extend({
     get() {
       return Ember.Object.create({
         row: this.get('headerRow'),
-        columns: this.get('columns'),
-        sortBy: this.get('sortBy')
+        columns: this.get('columns')
       });
     }
   })

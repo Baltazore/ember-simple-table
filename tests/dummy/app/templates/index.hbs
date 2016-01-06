@@ -4,10 +4,10 @@
 
 <h2>Simple Table with {{yield}} for header and rows</h2>
 
-{{#simple-table tableData=model.tableData tableColumns=model.tableColumns sortAction=(action 'sort') as |table|}}
+{{#simple-table tableData=model.tableData tableColumns=model.tableColumns  as |table|}}
     {{#simple-table-header table=table as |header|}}
-        {{simple-table-cell dataValue='Foo' dataKey='foo' sortBy=(action header.sortBy)}}
-        {{simple-table-cell dataValue='BaZ' dataKey='baz' sortBy=(action header.sortBy)}}
+        {{simple-table-cell dataValue='Foo' dataKey='foo' sortBy=(action 'sort')}}
+        {{simple-table-cell dataValue='BaZ' dataKey='baz' sortBy=(action 'sort')}}
     {{/simple-table-header}}
 
     {{#simple-table-body table=table as |row|}}
