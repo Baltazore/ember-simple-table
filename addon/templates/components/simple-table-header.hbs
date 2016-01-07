@@ -2,7 +2,7 @@
     {{#if hasBlock}}
         {{yield header}}
     {{else}}
-        {{#each columns as |column| }}
+        {{#each columnKeys as |column| }}
             {{simple-table-cell header=header dataKey=column }}
         {{/each}}
     {{/if}}

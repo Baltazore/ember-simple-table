@@ -13,14 +13,28 @@ export default Ember.Component.extend({
     this._super(...arguments);
   },
 
+  columnKeys: Ember.computed('columns', {
+    get() {
+      let columns = this.get('columns');
+      if (Ember.isArray(columns)) {
+        return columns;
+      } else {
+        return Object.keys(columns);
+      }
+    }
+  }),
+
   headerRow: Ember.computed('columns', {
     get() {
-      return this.get('columns').reduce(
-        (headerRow, column) => {
+      let columns = this.get('columns');
+      if (Ember.isArray(columns)) {
+        return columns.reduce((headerRow, column) => {
           headerRow[column] = Ember.String.capitalize(column);
           return headerRow;
-        }, {}
-      );
+        }, {});
+      } else {
+        return columns;
+      }
     }
   }),
 
