@@ -1,6 +1,6 @@
 {
   "name": "ember-simple-table",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Ember Simple table addon.",
   "directories": {
     "doc": "doc",
