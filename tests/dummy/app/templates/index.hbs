@@ -1,13 +1,40 @@
-<h2>Simple Table</h2>
+<h2> 1. Simple Table simple default config</h2>
 
 {{simple-table tableData=model.tableData tableColumns=model.tableColumns}}
 
-<h2>Simple Table with {{yield}} for header and rows</h2>
+<h2> 2. Simple Table with {{yield}} for body with default sort action</h2>
+
+{{#simple-table tableData=model.tableData tableColumns=model.tableColumns as |table|}}
+    {{simple-table-header table=table}}
+
+    {{#simple-table-body table=table as |row|}}
+        <td>{{row.foo}}</td>
+        <td>{{row.baz}}</td>
+    {{/simple-table-body}}
+{{/simple-table}}
+
+
+<h2> 3. Simple Table with {{yield}} for header</h2>
+
+{{#simple-table tableData=model.tableData tableColumns=model.tableColumns sortAction=(action 'sort') as |table|}}
+    {{#simple-table-header table=table as |header|}}
+        {{simple-table-cell header=header dataValue='Foo' dataKey='foo'}}
+        {{simple-table-cell header=header dataValue='BaZ' dataKey='baz'}}
+    {{/simple-table-header}}
+
+    {{simple-table-body table=table}}
+{{/simple-table}}
+
+<h2> 4. Simple Table with {{yield}} for header and rows</h2>
 
 {{#simple-table tableData=model.tableData tableColumns=model.tableColumns  as |table|}}
     {{#simple-table-header table=table as |header|}}
-        {{simple-table-cell dataValue='Foo' dataKey='foo' sortBy=(action 'sort')}}
-        {{simple-table-cell dataValue='BaZ' dataKey='baz' sortBy=(action 'sort')}}
+        {{#simple-table-cell dataKey='foo' sortBy=(action 'sortFoo')}}
+            <div class="th"> Foo </div>
+        {{/simple-table-cell}}
+        {{#simple-table-cell dataValue='BaZ' dataKey='baz' sortBy=(action 'sortBaz') as |value| }}
+            <div class="th"> {{value}} </div>
+        {{/simple-table-cell}}
     {{/simple-table-header}}
 
     {{#simple-table-body table=table as |row|}}

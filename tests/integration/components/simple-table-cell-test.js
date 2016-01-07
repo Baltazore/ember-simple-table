@@ -9,10 +9,10 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
-  this.set('data', { foo: 'bar' });
+  this.set('header', { row: { foo: 'Foo' } });
   this.set('dataKey', 'foo');
-  this.render(hbs`{{simple-table-cell data=data dataKey=dataKey}}`);
+  this.render(hbs`{{simple-table-cell header=header dataKey=dataKey}}`);
 
-  assert.equal(this.$().text().trim(), 'bar');
+  assert.equal(this.$().text().trim(), 'Foo');
   assert.equal(this.$('th').length, 1, 'Creates 1 cell');
 });

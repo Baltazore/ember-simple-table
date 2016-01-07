@@ -3,7 +3,7 @@
         {{yield header}}
     {{else}}
         {{#each columns as |column| }}
-            {{simple-table-cell data=headerRow dataKey=column sortBy=attrs.sortBy}}
+            {{simple-table-cell header=header dataKey=column }}
         {{/each}}
     {{/if}}
 </tr>

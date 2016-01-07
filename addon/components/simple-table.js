@@ -23,14 +23,21 @@ export default Ember.Component.extend({
     get() {
       return Ember.Object.create({
         rows: this.get('tRows'),
-        columns: this.get('tColumns')
+        columns: this.get('tColumns'),
+        sortAction: this.actions.sortBy.bind(this)
       });
     }
   }),
 
   actions: {
     sortBy(criteria) {
-      this.set('sortingCriteria', [criteria]);
+      let sortAction = this.getAttr('sortAction');
+
+      if (sortAction) {
+        sortAction(criteria);
+      } else {
+        this.set('sortingCriteria', [criteria]);
+      }
     }
   }
 

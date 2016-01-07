@@ -7,15 +7,20 @@ export default Ember.Component.extend({
   classNameBindings: ['sortingOrder'],
 
   didReceiveAttrs() {
-    let data = this.getAttr('data');
-    let dataKey = this.getAttr('dataKey');
+    let header = this.getAttr('header');
     let dataValue = this.getAttr('dataValue');
 
-    if (data && dataKey) {
+    if (header) {
+      let data = header.row;
+      let dataKey = this.getAttr('dataKey');
       let dataValueComputed = data[dataKey];
       this.set('dataValue', dataValueComputed);
+      this.set('sortAction', header.sortAction);
     } else if (dataValue) {
       this.set('dataValue', dataValue);
+    } else {
+      // Throw error
+      console.log('set dataValue on simple-table-cell');
     }
 
     this.set('sortingOrder', null);
@@ -36,6 +41,17 @@ export default Ember.Component.extend({
 
   click() {
     this.toggleSortingOrder();
-    this.attrs.sortBy(`${this.getAttr('dataKey')}:${this.get('sortingOrder')}`);
+    let sortAction = this.get('sortAction');
+    let sortBy   = this.getAttr('sortBy');
+    let criteria = `${this.getAttr('dataKey')}:${this.get('sortingOrder')}`;
+
+    if (sortAction) {
+      return sortAction(criteria);
+    } else if (sortBy) {
+      return sortBy(criteria);
+    } else {
+      // Throw error
+      console.log('set sortBy action on simple-table-cell');
+    }
   }
 });

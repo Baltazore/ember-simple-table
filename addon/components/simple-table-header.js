@@ -9,6 +9,7 @@ export default Ember.Component.extend({
     let table = this.getAttr('table');
 
     this.set('columns', table.columns);
+    this.set('sortAction', table.sortAction);
     this._super(...arguments);
   },
 
@@ -27,9 +28,22 @@ export default Ember.Component.extend({
     get() {
       return Ember.Object.create({
         row: this.get('headerRow'),
-        columns: this.get('columns')
+        sortAction: this.actions.sortBy.bind(this)
       });
     }
-  })
+  }),
+
+  actions: {
+    sortBy(args) {
+      let sortAction = this.get('sortAction');
+      let sortBy = this.getAttr('sortBy');
+
+      if (sortAction) {
+        return sortAction(args);
+      } else {
+        return sortBy(args);
+      }
+    }
+  }
 
 });
