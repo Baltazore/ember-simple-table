@@ -13,7 +13,6 @@
     {{/simple-table-body}}
 {{/simple-table}}
 
-
 <h2> 3. Simple Table with {{yield}} for header</h2>
 
 {{#simple-table tableData=model.tableData tableColumns=model.tableColumns sortAction=(action 'sort') as |table|}}
@@ -41,4 +40,19 @@
         <td>{{row.foo}}</td>
         <td>{{row.baz}}</td>
     {{/simple-table-body}}
+{{/simple-table}}
+
+<h2> 5. Simple Table with custom tbody and sorting</h2>
+
+{{#simple-table tableData=model.tableData tableColumns=model.tableColumns as |table|}}
+    {{simple-table-header table=table}}
+
+    <tbody>
+        {{#each table.rows as |row|}}
+            <tr>
+                <td>{{row.foo}}</td>
+                <td>{{row.baz}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
 {{/simple-table}}
