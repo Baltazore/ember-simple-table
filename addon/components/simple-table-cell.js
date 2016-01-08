@@ -21,6 +21,8 @@ export default Ember.Component.extend({
     } else {
       // Throw error
       console.log('set dataValue on simple-table-cell');
+      console.log('header', header);
+      console.log('dataValue', dataValue);
     }
 
     this.set('sortingOrder', null);

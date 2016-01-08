@@ -28,7 +28,7 @@
 
 {{#simple-table tableData=model.tableData tableColumns=model.tableColumns  as |table|}}
     {{#simple-table-header table=table as |header|}}
-        {{#simple-table-cell dataKey='foo' sortBy=(action 'sortFoo')}}
+        {{#simple-table-cell header=header dataKey='foo' sortBy=(action 'sortFoo')}}
             <div class="th"> Foo </div>
         {{/simple-table-cell}}
         {{#simple-table-cell dataValue='BaZ' dataKey='baz' sortBy=(action 'sortBaz') as |value| }}
