@@ -10,7 +10,7 @@ export default Ember.Component.extend({
     let header = this.getAttr('header');
     let dataValue = this.getAttr('dataValue');
 
-    if (header) {
+    if (header && header.row) {
       let data = header.row;
       let dataKey = this.getAttr('dataKey');
       let dataValueComputed = data[dataKey];
