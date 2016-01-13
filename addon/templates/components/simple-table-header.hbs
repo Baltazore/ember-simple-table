@@ -1,9 +1,9 @@
-<tr>
-    {{#if hasBlock}}
-        {{yield header}}
-    {{else}}
+{{#if hasBlock}}
+    {{yield header}}
+{{else}}
+    <tr>
         {{#each columnKeys as |column| }}
             {{simple-table-cell header=header dataKey=column }}
         {{/each}}
-    {{/if}}
-</tr>
+    </tr>
+{{/if}}
