@@ -1,6 +1,6 @@
 {{#if hasBlock}}
     {{yield table}}
 {{else}}
-    {{simple-table-header table=table sortBy=(action 'sortBy') }}
+    {{simple-table-header table=table}}
     {{simple-table-body table=table}}
 {{/if}}

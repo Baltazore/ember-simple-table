@@ -24,20 +24,18 @@ export default Ember.Component.extend({
       return Ember.Object.create({
         rows: this.get('tRows'),
         columns: this.get('tColumns'),
-        sortAction: this.actions.sortBy.bind(this)
+        sortAction: this.get('sortBy').bind(this)
       });
     }
   }),
 
-  actions: {
-    sortBy(criteria) {
-      let sortAction = this.getAttr('sortAction');
+  sortBy(criteria) {
+    let sortAction = this.getAttr('sortAction');
 
-      if (sortAction) {
-        sortAction(criteria);
-      } else {
-        this.set('sortingCriteria', [criteria]);
-      }
+    if (sortAction) {
+      sortAction(criteria);
+    } else {
+      this.set('sortingCriteria', [criteria]);
     }
   }
 
