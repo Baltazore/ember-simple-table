@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   layout,
   tagName: 'th',
   classNameBindings: ['sortingOrder'],
+  attributeBindings: ['rowspan', 'colspan'],
 
   didReceiveAttrs() {
     let header = this.getAttr('header');
