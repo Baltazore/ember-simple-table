@@ -42,22 +42,19 @@ export default Ember.Component.extend({
     get() {
       return Ember.Object.create({
         row: this.get('headerRow'),
-        sortAction: this.actions.sortBy.bind(this)
+        sortAction: this.get('sortBy').bind(this)
       });
     }
   }),
 
-  actions: {
-    sortBy(args) {
-      let sortAction = this.get('sortAction');
-      let sortBy = this.getAttr('sortBy');
+  sortBy(args) {
+    let sortAction = this.get('sortAction');
+    let sortBy = this.getAttr('sortBy');
 
-      if (sortAction) {
-        return sortAction(args);
-      } else {
-        return sortBy(args);
-      }
+    if (sortAction) {
+      return sortAction(args);
+    } else {
+      return sortBy(args);
     }
   }
-
 });

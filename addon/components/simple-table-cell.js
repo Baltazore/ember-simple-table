@@ -54,6 +54,7 @@ export default Ember.Component.extend({
     } else {
       // Throw error
       console.log('set sortBy action on simple-table-cell');
+      return true;
     }
   }
 });
