@@ -15,4 +15,5 @@ test('it renders', function(assert) {
 
   assert.equal(this.$().text().trim(), 'Foo');
   assert.equal(this.$('th').length, 1, 'Creates 1 cell');
+  assert.equal(this.$('.sortable').length, 1, 'Add .sortable class to cell');
 });

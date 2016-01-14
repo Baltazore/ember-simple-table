@@ -4,6 +4,7 @@ import layout from '../templates/components/simple-table-cell';
 export default Ember.Component.extend({
   layout,
   tagName: 'th',
+  classNames: ['sortable'],
   classNameBindings: ['sortingOrder'],
   attributeBindings: ['rowspan', 'colspan'],
 
