@@ -11,11 +11,13 @@ export default Ember.Component.extend({
     let header = this.getAttr('header');
     let dataValue = this.getAttr('dataValue');
 
-    if (header && header.row) {
-      let data = header.row;
-      let dataKey = this.getAttr('dataKey');
-      let dataValueComputed = data[dataKey];
-      this.set('dataValue', dataValueComputed);
+    if (header) {
+      if (header.row) {
+        let data = header.row;
+        let dataKey = this.getAttr('dataKey');
+        let dataValueComputed = data[dataKey];
+        this.set('dataValue', dataValueComputed);
+      }
       this.set('sortAction', header.sortAction);
     } else if (dataValue) {
       this.set('dataValue', dataValue);
