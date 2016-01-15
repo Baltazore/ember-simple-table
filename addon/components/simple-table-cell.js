@@ -8,6 +8,18 @@ export default Ember.Component.extend({
   classNameBindings: ['sortingOrder'],
   attributeBindings: ['rowspan', 'colspan'],
 
+  init() {
+    this._super(...arguments);
+
+    let header = this.getAttr('header');
+    if (header) {
+      header.addCell(Ember.Object.create({
+        id: `${this}`,
+        resetSorting: this.get('resetSorting').bind(this)
+      }));
+    }
+  },
+
   didReceiveAttrs() {
     let header = this.getAttr('header');
     let dataValue = this.getAttr('dataValue');
@@ -18,15 +30,21 @@ export default Ember.Component.extend({
         let dataKey = this.getAttr('dataKey');
         let dataValueComputed = data[dataKey];
         this.set('dataValue', dataValueComputed);
+      } else if (dataValue) {
+        this.set('dataValue', dataValue);
       }
+
       this.set('sortAction', header.sortAction);
-    } else if (dataValue) {
-      this.set('dataValue', dataValue);
+      this.set('sortPerformed', header.sortPerformed);
     }
 
     this.set('sortingOrder', null);
 
     this._super(...arguments);
+  },
+
+  resetSorting() {
+    this.set('sortingOrder', null);
   },
 
   toggleSortingOrder() {
@@ -42,6 +60,9 @@ export default Ember.Component.extend({
 
   click() {
     this.toggleSortingOrder();
+    // Talk to header that sorting started
+    this.get('sortPerformed')(`${this}`);
+
     let sortAction = this.get('sortAction');
     let sortBy   = this.getAttr('sortBy');
     let criteria = `${this.getAttr('dataKey')}:${this.get('sortingOrder')}`;

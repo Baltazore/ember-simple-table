@@ -9,7 +9,7 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
-  this.set('header', { row: { foo: 'Foo' } });
+  this.set('header', { row: { foo: 'Foo' }, addCell: () => true });
   this.set('dataKey', 'foo');
   this.render(hbs`{{simple-table-cell header=header dataKey=dataKey}}`);
 
