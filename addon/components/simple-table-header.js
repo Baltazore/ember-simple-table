@@ -72,10 +72,10 @@ export default Ember.Component.extend({
     let sortAction = this.get('sortAction');
     let sortBy = this.getAttr('sortBy');
 
-    if (sortAction) {
-      return sortAction(args);
-    } else {
+    if (sortBy) {
       return sortBy(args);
+    } else {
+      return sortAction(args);
     }
   }
 });

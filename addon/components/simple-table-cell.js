@@ -67,10 +67,10 @@ export default Ember.Component.extend({
     let sortBy   = this.getAttr('sortBy');
     let criteria = `${this.getAttr('dataKey')}:${this.get('sortingOrder')}`;
 
-    if (sortAction) {
-      return sortAction(criteria);
-    } else if (sortBy) {
+    if (sortBy) {
       return sortBy(criteria);
+    } else if (sortAction) {
+      return sortAction(criteria);
     } else {
       // Throw error
       console.log('set sortBy action on simple-table-cell');
