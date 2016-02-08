@@ -8,8 +8,10 @@
     {{simple-table-header table=table}}
 
     {{#simple-table-body table=table as |row|}}
-        <td>{{row.foo}}</td>
-        <td>{{row.baz}}</td>
+        <tr>
+            <td>{{row.foo}}</td>
+            <td>{{row.baz}}</td>
+        </tr>
     {{/simple-table-body}}
 {{/simple-table}}
 
@@ -37,8 +39,10 @@
     {{/simple-table-header}}
 
     {{#simple-table-body table=table as |row|}}
-        <td>{{row.foo}}</td>
-        <td>{{row.baz}}</td>
+        <tr>
+            <td>{{row.foo}}</td>
+            <td>{{row.baz}}</td>
+        </tr>
     {{/simple-table-body}}
 {{/simple-table}}
 
