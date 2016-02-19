@@ -10,26 +10,9 @@ export default Ember.Component.extend({
     this.set('cells', Ember.A());
   },
 
-  didReceiveAttrs() {
-    let table = this.getAttr('table');
-
-    this.set('columns', table.columns);
-    this.set('sortAction', table.sortAction);
-    this._super(...arguments);
-  },
-
   didRemoveElement() {
     // Teardown cells links
     this.set('cells', Ember.A());
-  },
-
-  addCell(cell) {
-    this.get('cells').addObject(cell);
-  },
-
-  sortPerformed(id) {
-    let targetCells = this.get('cells').filter((cell) => cell.id !== id);
-    targetCells.forEach((cell) => cell.resetSorting());
   },
 
   columnKeys: Ember.computed('columns', {
@@ -57,25 +40,25 @@ export default Ember.Component.extend({
     }
   }),
 
-  header: Ember.computed('headerRow', 'columns', 'sortBy', {
-    get() {
-      return Ember.Object.create({
-        row: this.get('headerRow'),
-        sortAction: this.get('sortBy').bind(this),
-        addCell: this.get('addCell').bind(this),
-        sortPerformed: this.get('sortPerformed').bind(this)
-      });
-    }
-  }),
+  actions: {
+    addCell(cell) {
+      this.get('cells').addObject(cell);
+    },
 
-  sortBy(args) {
-    let sortAction = this.get('sortAction');
-    let sortBy = this.getAttr('sortBy');
+    sortPerformed(id) {
+      let targetCells = this.get('cells').filter((cell) => cell.id !== id);
+      targetCells.forEach((cell) => cell.resetSorting());
+    },
 
-    if (sortBy) {
-      return sortBy(args);
-    } else {
-      return sortAction(args);
+    sortBy(args) {
+      let sortAction = this.get('sortAction');
+      let sortBy = this.get('sortBy');
+
+      if (sortBy) {
+        return sortBy(args);
+      } else {
+        return sortAction(args);
+      }
     }
   }
 });

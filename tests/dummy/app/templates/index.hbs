@@ -1,55 +1,55 @@
 <h2> 1. Simple Table simple default config</h2>
 
-{{simple-table tableData=model.tableData tableColumns=model.tableColumns}}
+{{simple-table tData=model.tableData tColumns=model.tableColumns}}
 
 <h2> 2. Simple Table with {{yield}} for body with default sort action</h2>
 
-{{#simple-table tableData=model.tableData tableColumns=model.tableColumns as |table|}}
-    {{simple-table-header table=table}}
+{{#simple-table tData=model.tableData tColumns=model.tableColumns as |table|}}
+    {{table.header}}
 
-    {{#simple-table-body table=table as |row|}}
+    {{#table.body as |row|}}
         <tr>
             <td>{{row.foo}}</td>
             <td>{{row.baz}}</td>
         </tr>
-    {{/simple-table-body}}
+    {{/table.body}}
 {{/simple-table}}
 
 <h2> 3. Simple Table with {{yield}} for header</h2>
 
-{{#simple-table tableData=model.tableData tableColumns=model.tableColumns sortAction=(action 'sort') as |table|}}
-    {{#simple-table-header table=table as |header|}}
-        {{simple-table-cell header=header dataValue='Foo' dataKey='foo'}}
-        {{simple-table-cell header=header dataValue='BaZ' dataKey='baz'}}
-    {{/simple-table-header}}
+{{#simple-table tData=model.tableData tColumns=model.tableColumns sortAction=(action 'sort') as |table|}}
+    {{#table.header as |header|}}
+        {{header.cell dataValue='Foo' dataKey='foo'}}
+        {{header.cell dataValue='BaZ' dataKey='baz'}}
+    {{/table.header}}
 
-    {{simple-table-body table=table}}
+    {{table.body}}
 {{/simple-table}}
 
 <h2> 4. Simple Table with {{yield}} for header and rows</h2>
 
-{{#simple-table tableData=model.tableData tableColumns=model.tableColumns  as |table|}}
-    {{#simple-table-header table=table as |header|}}
-        {{#simple-table-cell header=header dataKey='foo' sortBy=(action 'sortFoo')}}
+{{#simple-table tData=model.tableData tColumns=model.tableColumns  as |table|}}
+    {{#table.header as |header|}}
+        {{#header.cell dataKey='foo' sortBy=(action 'sortFoo')}}
             <div class="th"> Foo </div>
-        {{/simple-table-cell}}
-        {{#simple-table-cell header=header dataValue='BaZ' dataKey='baz' sortBy=(action 'sortBaz') as |value| }}
+        {{/header.cell}}
+        {{#header.cell dataValue='BaZ' dataKey='baz' sortBy=(action 'sortBaz') as |value| }}
             <div class="th"> {{value}} </div>
-        {{/simple-table-cell}}
-    {{/simple-table-header}}
+        {{/header.cell}}
+    {{/table.header}}
 
-    {{#simple-table-body table=table as |row|}}
+    {{#table.body table=table as |row|}}
         <tr>
             <td>{{row.foo}}</td>
             <td>{{row.baz}}</td>
         </tr>
-    {{/simple-table-body}}
+    {{/table.body}}
 {{/simple-table}}
 
 <h2> 5. Simple Table with custom tbody and sorting</h2>
 
-{{#simple-table tableData=model.tableData tableColumns=model.tableColumns as |table|}}
-    {{simple-table-header table=table}}
+{{#simple-table tData=model.tableData tColumns=model.tableColumns as |table|}}
+    {{table.header}}
 
     <tbody>
         {{#each table.rows as |row|}}

@@ -1,6 +1,10 @@
 {{#if hasBlock}}
-    {{yield table}}
+    {{yield (hash
+      header=(component "simple-table-header" columns=tColumns sortAction=(action "sortBy"))
+      body=(component "simple-table-body" columns=tColumns rows=tRows)
+      rows=tRows
+      )}}
 {{else}}
-    {{simple-table-header table=table}}
-    {{simple-table-body table=table}}
+    {{simple-table-header columns=tColumns sortAction=(action "sortBy")}}
+    {{simple-table-body columns=tColumns rows=tRows}}
 {{/if}}

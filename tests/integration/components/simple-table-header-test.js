@@ -9,9 +9,9 @@ test('renders for simple data header row with 2 cells from array', function(asse
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });"
 
-  this.set('table', { columns: ['foo', 'baz'] });
+  this.set('columns', ['foo', 'baz']);
 
-  this.render(hbs`{{simple-table-header table=table}}`);
+  this.render(hbs`{{simple-table-header columns=columns}}`);
 
   assert.equal(this.$('tr').length, 1, 'Creates 1 header row');
   assert.equal(this.$('th').length, 2, 'Creates 2 header cells');
@@ -21,9 +21,9 @@ test('renders for simple data header row with 2 cells from object', function(ass
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });"
 
-  this.set('table', { columns: { foo: 'Foo', baz: 'Baz' } });
+  this.set('columns', { foo: 'Foo', baz: 'Baz' });
 
-  this.render(hbs`{{simple-table-header table=table}}`);
+  this.render(hbs`{{simple-table-header columns=columns}}`);
 
   assert.equal(this.$('tr').length, 1, 'Creates 1 header row');
   assert.equal(this.$('th').length, 2, 'Creates 2 header cells');

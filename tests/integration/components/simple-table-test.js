@@ -12,7 +12,7 @@ test('it renders with simple data', function(assert) {
   this.set('tableData', [{ foo: 'bar', baz: 'boo' }]);
   this.set('tableColumns', ['baz', 'foo']);
 
-  this.render(hbs`{{simple-table tableData=tableData tableColumns=tableColumns}}`);
+  this.render(hbs`{{simple-table tData=tableData tColumns=tableColumns}}`);
 
   assert.notEqual(this.$().text().trim(), '');
   assert.equal(this.$('table').length, 1, 'Creates table');
@@ -38,9 +38,9 @@ test('it renders with simple data and yield table data', function(assert) {
   this.set('tableColumns', ['baz', 'foo']);
 
   this.render(hbs`
-    {{#simple-table tableData=tableData tableColumns=tableColumns as |table| }}
-        {{simple-table-header table=table}}
-        {{simple-table-body table=table}}
+    {{#simple-table tData=tableData tColumns=tableColumns as |table| }}
+        {{table.header}}
+        {{table.body}}
     {{/simple-table}}
   `);
 
@@ -68,8 +68,8 @@ test('it renders with simple data and yield table data', function(assert) {
   this.set('tableColumns', ['baz', 'foo']);
 
   this.render(hbs`
-    {{#simple-table tableData=tableData tableColumns=tableColumns as |table| }}
-        {{simple-table-header table=table}}
+    {{#simple-table tData=tableData tColumns=tableColumns as |table| }}
+        {{table.header}}
 
         <tbody>
             {{#each table.rows as |row| }}

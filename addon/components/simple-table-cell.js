@@ -7,44 +7,32 @@ export default Ember.Component.extend({
   classNames: ['sortable'],
   classNameBindings: ['sortingOrder'],
   attributeBindings: ['rowspan', 'colspan'],
+  sortingOrder: null,
 
   init() {
     this._super(...arguments);
 
-    let header = this.getAttr('header');
-    if (header) {
-      header.addCell(Ember.Object.create({
-        id: `${this}`,
-        resetSorting: this.get('resetSorting').bind(this)
-      }));
-    }
-  },
-
-  didReceiveAttrs() {
-    let header = this.getAttr('header');
-    let dataValue = this.getAttr('dataValue');
-
-    if (header) {
-      if (header.row) {
-        let data = header.row;
-        let dataKey = this.getAttr('dataKey');
-        let dataValueComputed = data[dataKey];
-        this.set('dataValue', dataValueComputed);
-      } else if (dataValue) {
-        this.set('dataValue', dataValue);
-      }
-
-      this.set('sortAction', header.sortAction);
-      this.set('sortPerformed', header.sortPerformed);
-    }
-
-    this.set('sortingOrder', null);
-
-    this._super(...arguments);
+    this.get('addCell')(Ember.Object.create({
+      id: `${this}`,
+      resetSorting: this.get('resetSorting').bind(this)
+    }));
   },
 
   resetSorting() {
     this.set('sortingOrder', null);
+  },
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    let row = this.get('row');
+    let dataValue = this.get('dataValue');
+
+    if (row && !dataValue) {
+      let dataKey = this.get('dataKey');
+      let dataValueComputed = row[dataKey];
+      this.set('dataValue', dataValueComputed);
+    }
   },
 
   toggleSortingOrder() {
@@ -63,9 +51,9 @@ export default Ember.Component.extend({
     // Talk to header that sorting started
     this.get('sortPerformed')(`${this}`);
 
+    let sortBy = this.get('sortBy');
+    let criteria = `${this.get('dataKey')}:${this.get('sortingOrder')}`;
     let sortAction = this.get('sortAction');
-    let sortBy   = this.getAttr('sortBy');
-    let criteria = `${this.getAttr('dataKey')}:${this.get('sortingOrder')}`;
 
     if (sortBy) {
       return sortBy(criteria);

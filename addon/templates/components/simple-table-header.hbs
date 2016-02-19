@@ -1,9 +1,23 @@
 {{#if hasBlock}}
-    {{yield header}}
+    {{yield (hash
+      cell=(component "simple-table-cell"
+                row=headerRow
+                dataKey=column
+                addCell=(action "addCell")
+                sortAction=(action "sortBy")
+                sortPerformed=(action "sortPerformed")
+            )
+      )}}
 {{else}}
     <tr>
         {{#each columnKeys as |column| }}
-            {{simple-table-cell header=header dataKey=column }}
+            {{simple-table-cell
+              row=headerRow
+              dataKey=column
+              addCell=(action "addCell")
+              sortAction=(action "sortBy")
+              sortPerformed=(action "sortPerformed")
+            }}
         {{/each}}
     </tr>
 {{/if}}
