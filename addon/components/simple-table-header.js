@@ -4,16 +4,7 @@ import layout from '../templates/components/simple-table-header';
 export default Ember.Component.extend({
   layout,
   tagName: 'thead',
-
-  init() {
-    this._super(...arguments);
-    this.set('cells', Ember.A());
-  },
-
-  didRemoveElement() {
-    // Teardown cells links
-    this.set('cells', Ember.A());
-  },
+  sortingCriteria: { key: null, order: null },
 
   columnKeys: Ember.computed('columns', {
     get() {
@@ -40,24 +31,35 @@ export default Ember.Component.extend({
     }
   }),
 
+  orderForColumn(sortingKey) {
+    let { key, order } = this.get('sortingCriteria');
+
+    if (sortingKey === key) {
+      if (order === 'asc') {
+        return 'desc';
+      } else if (order === 'desc') {
+        return 'asc';
+      }
+    } else {
+      // Default to desc order
+      return 'desc';
+    }
+  },
+
   actions: {
-    addCell(cell) {
-      this.get('cells').addObject(cell);
-    },
-
-    sortPerformed(id) {
-      let targetCells = this.get('cells').filter((cell) => cell.id !== id);
-      targetCells.forEach((cell) => cell.resetSorting());
-    },
-
-    sortBy(args) {
+    sortBy(key) {
       let sortAction = this.get('sortAction');
-      let sortBy = this.get('sortBy');
+      let sortBy     = this.get('sortBy');
+
+      let order    = this.orderForColumn(key);
+      let criteria = `${key}:${order}`;
+
+      this.set('sortingCriteria', { key, order });
 
       if (sortBy) {
-        return sortBy(args);
+        return sortBy(criteria);
       } else {
-        return sortAction(args);
+        return sortAction(criteria);
       }
     }
   }

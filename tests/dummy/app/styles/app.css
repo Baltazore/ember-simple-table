@@ -5,3 +5,7 @@
 .asc {
   color: red;
 }
+
+.blue-border {
+  border: 1px solid blue;
+}

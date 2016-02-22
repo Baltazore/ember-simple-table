@@ -3,9 +3,8 @@
       cell=(component "simple-table-cell"
                 row=headerRow
                 dataKey=column
-                addCell=(action "addCell")
+                sortingCriteria=sortingCriteria
                 sortAction=(action "sortBy")
-                sortPerformed=(action "sortPerformed")
             )
       )}}
 {{else}}
@@ -14,9 +13,8 @@
             {{simple-table-cell
               row=headerRow
               dataKey=column
-              addCell=(action "addCell")
+              sortingOrder=(simple-table-sorting-class sortingCriteria column)
               sortAction=(action "sortBy")
-              sortPerformed=(action "sortPerformed")
             }}
         {{/each}}
     </tr>

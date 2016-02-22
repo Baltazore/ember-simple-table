@@ -1,0 +1,17 @@
+{{#if hasBlock}}
+    <tr>
+        {{#each columnKeys as |column| }}
+            <th class="sortable {{simple-table-sorting-class sortingCriteria column}}" onclick={{action "sortBy" column}}>
+                {{yield headerRow column}}
+            </th>
+        {{/each}}
+    </tr>
+{{else}}
+    <tr>
+        {{#each columnKeys as |column| }}
+            <th class="sortable {{simple-table-sorting-class sortingCriteria column}}" onclick={{action "sortBy" column}}>
+                {{get headerRow column}}
+            </th>
+        {{/each}}
+    </tr>
+{{/if}}
