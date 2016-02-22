@@ -1,7 +1,7 @@
 {{#if hasBlock}}
     {{yield (hash
       header=(component "simple-table-header" columns=tColumns sortAction=(action "sortBy"))
-      headerRow=(component "simple-table-header-row" columns=tColumns sortAction=(action "sortBy"))
+      header-row=(component "simple-table-header-row" columns=tColumns sortAction=(action "sortBy"))
       body=(component "simple-table-body" columns=tColumns rows=tRows)
       rows=tRows
       )

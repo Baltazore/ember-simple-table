@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   layout,
   tagName: 'thead',
   sortingCriteria: { key: null, order: null },
+  columns: null,
 
   columnKeys: Ember.computed('columns', {
     get() {

@@ -3,7 +3,7 @@
         {{yield rowData}}
     {{else}}
         <tr>
-            {{#each columns as |column| }}
+            {{#each columnKeys as |column| }}
                 <td>{{get rowData column}}</td>
             {{/each}}
         </tr>

@@ -64,20 +64,20 @@
 
 <h2> 6. Simple Table with for header row</h2>
 
-{{#simple-table tData=model.tableData tColumns=model.tableColumns as |table|}}
-    {{table.headerRow}}
+{{#simple-table tData=model.tableData tColumns=model.complexColumns as |table|}}
+    {{table.header-row}}
 
     {{table.body}}
 {{/simple-table}}
 
 <h2> 7. Simple Table with for header row</h2>
 
-{{#simple-table tData=model.tableData tColumns=model.tableColumns as |table|}}
-    {{#table.headerRow trClass="tr-class" thClass="th-class" as |row column|}}
+{{#simple-table tData=model.tableData tColumns=model.complexColumns as |table|}}
+    {{#table.header-row trClass="tr-class" thClass="th-class" as |row column|}}
         <div class="blue-border">
-            {{get row column}}
+            {{get (get row column) "columns"}}
         </div>
-    {{/table.headerRow}}
+    {{/table.header-row}}
 
     {{table.body}}
 {{/simple-table}}

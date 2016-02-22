@@ -13,6 +13,7 @@
             {{simple-table-cell
               row=headerRow
               dataKey=column
+              sortable=(get (get headerRow column) "sortable")
               sortingOrder=(simple-table-sorting-class sortingCriteria column)
               sortAction=(action "sortBy")
             }}
