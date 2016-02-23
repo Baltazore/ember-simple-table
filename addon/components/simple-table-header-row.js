@@ -1,35 +1,52 @@
 import Ember from 'ember';
 import layout from '../templates/components/simple-table-header-row';
-import Header from './simple-table-header';
 
-export default Header.extend({
+export default Ember.Component.extend({
   layout,
+  tagName: 'thead',
   trClass: null,
   thClass: null,
+  columns: null,
 
-  sortableHash: Ember.computed('columns', {
-    get() {
+  sortingCriteria: { key: null, order: null },
+
+  didReceiveAttrs({oldAttrs, newAttrs}) {
+    this._super(...arguments);
+
+    if (!oldAttrs || oldAttrs.columns !== newAttrs.columns) {
       let columns = this.get('columns');
       let columnKeys = Object.keys(columns);
+      let sortableHash = {};
+      let classesHash = {};
+      let headerRow = {};
 
-      return columnKeys.reduce((sortableHash, key) => {
+      columnKeys.forEach((key) => {
         sortableHash[key] = columns[key].sortable;
-        return sortableHash;
-      }, {});
-    }
-  }),
-
-  classesHash: Ember.computed('columns', {
-    get() {
-      let columns = this.get('columns');
-      let columnKeys = Object.keys(columns);
-
-      return columnKeys.reduce((classesHash, key) => {
         classesHash[key] = columns[key].class;
-        return classesHash;
-      }, {});
+        headerRow[key] = columns[key].columns;
+      });
+
+      this.set('columnKeys', columnKeys);
+      this.set('sortableHash', sortableHash);
+      this.set('classesHash', classesHash);
+      this.set('headerRow', headerRow);
     }
-  }),
+  },
+
+  orderForColumn(sortingKey) {
+    let { key, order } = this.get('sortingCriteria');
+
+    if (sortingKey === key) {
+      if (order === 'asc') {
+        return 'desc';
+      } else if (order === 'desc') {
+        return 'asc';
+      }
+    } else {
+      // Default to desc order
+      return 'desc';
+    }
+  },
 
   actions: {
     sortBy(key) {

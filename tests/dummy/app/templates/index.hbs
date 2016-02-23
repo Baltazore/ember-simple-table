@@ -75,7 +75,7 @@
 {{#simple-table tData=model.tableData tColumns=model.complexColumns as |table|}}
     {{#table.header-row trClass="tr-class" thClass="th-class" as |row column|}}
         <div class="blue-border">
-            {{get (get row column) "columns"}}
+            {{get row column}}
         </div>
     {{/table.header-row}}
 
