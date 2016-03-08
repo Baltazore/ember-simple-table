@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   tagName: 'thead',
   trClass: null,
   thClass: null,
-  columns: null,
+  columnsArray: null,
 
   sortingCriteria: { key: null, order: null },
 
@@ -14,22 +14,15 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     if (!oldAttrs || oldAttrs.columns !== newAttrs.columns) {
-      let columns = this.get('columns');
-      let columnKeys = Object.keys(columns);
-      let sortableHash = {};
-      let classesHash = {};
-      let headerRow = {};
-
-      columnKeys.forEach((key) => {
-        sortableHash[key] = columns[key].sortable;
-        classesHash[key] = columns[key].class;
-        headerRow[key] = columns[key].columns;
+      let columns      = this.get('columns');
+      let columnsArray = columns.map((item) => {
+        if ( Ember.isArray(item)) {
+          return Ember.A(item);
+        } else {
+          return Ember.A([ item ]);
+        }
       });
-
-      this.set('columnKeys', columnKeys);
-      this.set('sortableHash', sortableHash);
-      this.set('classesHash', classesHash);
-      this.set('headerRow', headerRow);
+      this.set('columnsArray', columnsArray);
     }
   },
 
@@ -50,11 +43,6 @@ export default Ember.Component.extend({
 
   actions: {
     sortBy(key) {
-      // Do nothing if column is not sortable
-      if (!this.get(`columns.${key}.sortable`)) {
-        return true;
-      }
-
       let sortAction = this.get('sortAction');
       let sortBy     = this.get('sortBy');
 

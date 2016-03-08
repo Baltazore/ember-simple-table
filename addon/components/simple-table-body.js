@@ -9,7 +9,11 @@ export default Ember.Component.extend({
     get() {
       let columns = this.get('columns');
       if (Ember.isArray(columns)) {
-        return columns;
+        if (columns[0].key) {
+          return columns.map((item) => item.key);
+        } else {
+          return columns;
+        }
       } else {
         return Object.keys(columns);
       }

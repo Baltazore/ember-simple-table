@@ -10,10 +10,10 @@ export default Ember.Route.extend({
         { foo: 'bar4', baz: 'boo4' }
       ],
       tableColumns: ['foo', 'baz'],
-      complexColumns: {
-        foo: { columns: ["Foo"], sortable: true, class: '' },
-        baz: { columns: ["Baz"], sortable: false, class: '' }
-      }
+      complexColumns: [
+        { key: 'foo', name: "Foo", sortable: true, class: '' },
+        { key: 'baz', name: "Baz", sortable: false, class: '' }
+      ]
     };
   }
 });

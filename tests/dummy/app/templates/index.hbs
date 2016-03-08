@@ -73,10 +73,14 @@
 <h2> 7. Simple Table with for header row</h2>
 
 {{#simple-table tData=model.tableData tColumns=model.complexColumns as |table|}}
-    {{#table.header-row trClass="tr-class" thClass="th-class" as |header|}}
-        <div class="blue-border {{header.sortingClass}}" onclick={{header.sortAction}}>
-            {{header.column}}
-        </div>
+    {{#table.header-row trClass="tr-class" thClass="th-class" as |column|}}
+        {{#if column.sortable}}
+            <div class="blue-border {{column.sortingOrder}}" onclick={{column.sortAction}}>
+                {{column.name}}
+            </div>
+        {{else}}
+            <div class="blue-border" > {{column.name}} </div>
+        {{/if}}
     {{/table.header-row}}
 
     {{table.body}}
