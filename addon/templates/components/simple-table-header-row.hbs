@@ -1,16 +1,16 @@
 <tr class={{trClass}}>
     {{#each columnsArray as |columns| }}
         <th class="{{thClass}}" >
-            {{#each columns as |column|}}
-                {{#if hasBlock}}
-                    {{yield (hash
-                      name=column.name
-                      sortable=column.sortable
-                      sortingOrder=(simple-table-sorting-class sortingCriteria column.key)
-                      sortAction=(action "sortBy" column.key)
-                      )}}
-                {{else}}
-                    <div class="th-inner">
+            <div class="th-inner">
+                {{#each columns as |column|}}
+                    {{#if hasBlock}}
+                        {{yield (hash
+                          name=column.name
+                          sortable=column.sortable
+                          sortingOrder=(simple-table-sorting-class sortingCriteria column.key)
+                          sortAction=(action "sortBy" column.key)
+                          )}}
+                    {{else}}
                         {{#if column.sortable}}
                             <span class="sortable {{simple-table-sorting-class sortingCriteria column.key}}"
                                   onclick={{action 'sortBy' column.key}}>
@@ -19,9 +19,9 @@
                         {{else}}
                             <span> {{column.name}} </span>
                         {{/if}}
-                    </div>
-                {{/if}}
-            {{/each}}
+                    {{/if}}
+                {{/each}}
+            </div>
         </th>
     {{/each}}
 </tr>
