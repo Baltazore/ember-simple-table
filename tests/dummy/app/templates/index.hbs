@@ -73,9 +73,9 @@
 <h2> 7. Simple Table with for header row</h2>
 
 {{#simple-table tData=model.tableData tColumns=model.complexColumns as |table|}}
-    {{#table.header-row trClass="tr-class" thClass="th-class" as |row column|}}
-        <div class="blue-border">
-            {{get row column}}
+    {{#table.header-row trClass="tr-class" thClass="th-class" as |header|}}
+        <div class="blue-border {{header.sortingClass}}" onclick={{header.sortAction}}>
+            {{header.column}}
         </div>
     {{/table.header-row}}
 

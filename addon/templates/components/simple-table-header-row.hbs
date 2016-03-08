@@ -1,14 +1,19 @@
 <tr class={{trClass}}>
-    {{#each columnKeys as |column| }}
-        <th class="{{if (get sortableHash column) "sortable"}} {{get classesHash column}} {{simple-table-sorting-class sortingCriteria column}} {{thClass}}"
-            onclick={{action "sortBy" column}}>
-
-            {{#if hasBlock}}
-                {{yield headerRow column}}
-            {{else}}
-                {{get headerRow column}}
-            {{/if}}
-
-        </th>
-    {{/each}}
+  {{#each columnKeys as |column| }}
+    <th class="{{get classesHash column}} {{thClass}}" >
+      {{#if hasBlock}}
+        {{yield (hash
+          column=(get headerRow column)
+          sortable=(get sortableHash column)
+          sortingClass=(simple-table-sorting-class sortingCriteria column)
+          sortAction=(action "sortBy" column)
+          )}}
+        {{else}}
+          <span class="{{if (get sortableHash column) "sortable"}} {{simple-table-sorting-class sortingCriteria column}}"
+                onclick={{action 'sortBy' column}}>
+            {{get headerRow column}}
+          </span>
+        {{/if}}
+      </th>
+  {{/each}}
 </tr>
