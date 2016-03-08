@@ -10,14 +10,16 @@
                       sortAction=(action "sortBy" column.key)
                       )}}
                 {{else}}
-                    {{#if column.sortable}}
-                        <span class="sortable {{simple-table-sorting-class sortingCriteria column.key}}"
-                              onclick={{action 'sortBy' column.key}}>
-                            {{column.name}}
-                        </span>
-                    {{else}}
-                        <span> {{column.name}} </span>
-                    {{/if}}
+                    <div class="th-inner">
+                        {{#if column.sortable}}
+                            <span class="sortable {{simple-table-sorting-class sortingCriteria column.key}}"
+                                  onclick={{action 'sortBy' column.key}}>
+                                {{column.name}} <i class="sort-arrow"></i>
+                            </span>
+                        {{else}}
+                            <span> {{column.name}} </span>
+                        {{/if}}
+                    </div>
                 {{/if}}
             {{/each}}
         </th>
