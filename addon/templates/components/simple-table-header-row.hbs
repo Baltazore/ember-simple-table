@@ -6,12 +6,12 @@
                     {{#if hasBlock}}
                         {{yield (hash
                           name=column.name
-                          sortable=column.sortable
+                          sortable=(simple-table-sorting-enabled column)
                           sortingOrder=(simple-table-sorting-class sortingCriteria column.key)
                           sortAction=(action "sortBy" column.key)
                           )}}
                     {{else}}
-                        {{#if column.sortable}}
+                        {{#if (simple-table-sorting-enabled column)}}
                             <span class="sortable {{simple-table-sorting-class sortingCriteria column.key}}"
                                   onclick={{action 'sortBy' column.key}}>
                                 {{column.name}} <i class="sort-arrow"></i>
