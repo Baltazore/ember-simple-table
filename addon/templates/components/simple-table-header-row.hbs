@@ -2,25 +2,52 @@
     {{#each columnsArray as |columns| }}
         <th class="{{thClass}}" >
             <div class="th-inner">
-                {{#each columns as |column|}}
-                    {{#if hasBlock}}
-                        {{yield (hash
-                          name=column.name
-                          sortable=(simple-table-sorting-enabled column)
-                          sortingOrder=(simple-table-sorting-class sortingCriteria column.key)
-                          sortAction=(action "sortBy" column.key)
-                          )}}
-                    {{else}}
-                        {{#if (simple-table-sorting-enabled column)}}
-                            <span class="sortable {{simple-table-sorting-class sortingCriteria column.key}}"
-                                  onclick={{action 'sortBy' column.key}}>
-                                {{column.name}} <i class="sort-arrow"></i>
-                            </span>
+                {{#if columns.hasMultipleColumns}}
+
+                    {{#each columns.items as |column|}}
+
+                        {{#if hasBlock}}
+                            {{yield (hash
+                            name=column.name
+                            sortable=(simple-table-sorting-enabled column)
+                            sortingOrder=(simple-table-sorting-class sortingCriteria column.key)
+                            sortAction=(action "sortBy" column.key)
+                            )}}
                         {{else}}
-                            <span> {{column.name}} </span>
+                            {{#if (simple-table-sorting-enabled column)}}
+                                <span class="sortable {{simple-table-sorting-class sortingCriteria column.key}}"
+                                    onclick={{action 'sortBy' column.key}}>
+                                    {{column.name}} <i class="sort-arrow"></i>
+                                </span>
+                            {{else}}
+                                <span> {{column.name}} </span>
+                            {{/if}}
                         {{/if}}
-                    {{/if}}
-                {{/each}}
+
+                    {{/each}}
+
+                {{else}}
+                    {{#with columns.items as |column| }}
+                        {{#if hasBlock}}
+                            {{yield (hash
+                            name=column.name
+                            sortable=(simple-table-sorting-enabled column)
+                            sortingOrder=(simple-table-sorting-class sortingCriteria column.key)
+                            sortAction=(action "sortBy" column.key)
+                            )}}
+                        {{else}}
+                            {{#if (simple-table-sorting-enabled column)}}
+                                <span class="sortable {{simple-table-sorting-class sortingCriteria column.key}}"
+                                    onclick={{action 'sortBy' column.key}}>
+                                    {{column.name}} <i class="sort-arrow"></i>
+                                </span>
+                            {{else}}
+                                <span> {{column.name}} </span>
+                            {{/if}}
+                        {{/if}}
+
+                    {{/with}}
+                {{/if}}
             </div>
         </th>
     {{/each}}

@@ -16,10 +16,10 @@ export default Ember.Component.extend({
     if (!oldAttrs || oldAttrs.columns !== newAttrs.columns) {
       let columns      = this.get('columns');
       let columnsArray = columns.map((item) => {
-        if ( Ember.isArray(item)) {
-          return Ember.A(item);
+        if (Ember.isArray(item)) {
+          return { hasMultipleColumns:  true, items: item };
         } else {
-          return Ember.A([ item ]);
+          return { hasMultipleColumns: false, items: item };
         }
       });
       this.set('columnsArray', columnsArray);
