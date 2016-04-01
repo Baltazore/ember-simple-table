@@ -73,7 +73,7 @@
 <h2> 7. Simple Table with for header row</h2>
 
 {{#simple-table tData=model.tableData tColumns=model.complexColumns as |table|}}
-    {{#table.header-row trClass="tr-class" thClass="th-class" as |column|}}
+    {{#table.header-selectable trClass="tr-class" thClass="th-class" selectAllAction=(action "selectAllRows") as |column|}}
         {{#if column.sortable}}
             <div class="blue-border {{column.sortingOrder}}" onclick={{column.sortAction}}>
                 {{column.name}}
@@ -81,7 +81,17 @@
         {{else}}
             <div class="blue-border" > {{column.name}} </div>
         {{/if}}
-    {{/table.header-row}}
+    {{/table.header-selectable}}
 
-    {{table.body}}
+    <tbody>
+        {{#each table.rows as |row|}}
+            <tr>
+                <td>
+                    <input type="checkbox" checked={{row.checked}} value={{row.foo}} onchange={{action "selectRow" value="target.value"}}>
+                </td>
+                <td>{{row.foo}}</td>
+                <td>{{row.baz}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
 {{/simple-table}}

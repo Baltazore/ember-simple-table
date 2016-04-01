@@ -12,6 +12,15 @@ export default Ember.Controller.extend({
 
     sortBaz(criteria) {
       console.log('sorting Baz column with criteria', criteria);
+    },
+
+    selectAllRows() {
+      console.log('All Rows Selected');
+    },
+
+    selectRow(row) {
+      debugger;
+      console.log(`Selected row ${row}`);
     }
   }
 });

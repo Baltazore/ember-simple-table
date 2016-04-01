@@ -1,0 +1,1 @@
+export { default } from 'ember-simple-table/components/simple-table-header-selectable';
