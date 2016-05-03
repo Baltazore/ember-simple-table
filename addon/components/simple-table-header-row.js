@@ -15,9 +15,11 @@ export default Ember.Component.extend({
       let columns      = this.get('columns');
       let columnsArray = columns.map((item) => {
         if (Ember.isArray(item)) {
-          return { hasMultipleColumns:  true, items: item };
+          let { style, classes } = item[0];
+          return { hasMultipleColumns: true, items: item, style, classes };
         } else {
-          return { hasMultipleColumns: false, items: item };
+          let { style, classes } = item;
+          return { hasMultipleColumns: false, items: item, style, classes };
         }
       });
       this.set('columnsArray', columnsArray);

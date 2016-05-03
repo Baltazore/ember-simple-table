@@ -4,36 +4,21 @@ import layout from '../templates/components/simple-table-cell';
 export default Ember.Component.extend({
   layout,
   tagName: 'th',
-  classNames: ['sortable'],
-  classNameBindings: ['sortingOrder'],
-  attributeBindings: ['rowspan', 'colspan'],
-  sortingOrder: null,
 
-  didReceiveAttrs() {
-    this._super(...arguments);
+  classNameBindings: ['columnsClass'],
+  attributeBindings: ['rowspan', 'colspan', 'columnsStyle:style'],
 
-    let row = this.get('row');
-    let dataKey = this.get('dataKey');
-    let dataValue = this.get('dataValue');
-
-    if (row && !dataValue) {
-      this.set('dataValue', row[dataKey]);
+  columnsClass: Ember.computed.alias('columns.classes'),
+  columnsStyle: Ember.computed('columns.style', {
+    get() {
+      return Ember.String.htmlSafe(this.get('columns.style'));
     }
-  },
+  }),
 
-  click() {
-    let sortBy = this.get('sortBy');
-    let sortAction = this.get('sortAction');
-    let key = this.get('dataKey');
-
-    if (sortBy) {
-      return sortBy(key);
-    } else if (sortAction) {
-      return sortAction(key);
-    } else {
-      // Throw error
-      console.log('set sortBy action on simple-table-cell');
-      return true;
+  actions: {
+    sortBy(key) {
+      return this.get('sortAction')(key);
     }
   }
+
 });

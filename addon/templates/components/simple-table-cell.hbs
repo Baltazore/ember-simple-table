@@ -1,5 +1,47 @@
-{{#if hasBlock}}
-    {{yield dataValue}}
+{{#if columns.hasMultipleColumns}}
+    {{#each columns.items as |column|}}
+
+        {{#if hasBlock}}
+            {{yield (hash
+              name=column.name
+              sortable=(simple-table-sorting-enabled column)
+              sortOrder=(simple-table-sorting-class sortingCriteria column.key)
+              sortAction=(action "sortBy" column.key)
+              )}}
+        {{else}}
+
+            {{#if (simple-table-sorting-enabled column)}}
+                <span class="sortable" onclick={{action 'sortBy' column.key}}>
+                    {{column.name}} <i class="sort-arrow {{simple-table-sorting-class sortingCriteria column.key}}"></i>
+                </span>
+            {{else}}
+                <span> {{column.name}} </span>
+            {{/if}}
+
+        {{/if}}
+
+    {{/each}}
 {{else}}
-    {{dataValue}}
+    {{#with columns.items as |column| }}
+
+        {{#if hasBlock}}
+            {{yield (hash
+              name=column.name
+              sortable=(simple-table-sorting-enabled column)
+              sortOrder=(simple-table-sorting-class sortingCriteria column.key)
+              sortAction=(action "sortBy" column.key)
+              )}}
+        {{else}}
+
+            {{#if (simple-table-sorting-enabled column)}}
+                <span class="sortable" onclick={{action 'sortBy' column.key}}>
+                    {{column.name}} <i class="sort-arrow {{simple-table-sorting-class sortingCriteria column.key}}"></i>
+                </span>
+            {{else}}
+                <span> {{column.name}} </span>
+            {{/if}}
+
+        {{/if}}
+
+    {{/with}}
 {{/if}}
