@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import layout from '../templates/components/simple-table-header-selectable';
 import BaseHeaderRow from './simple-table-header-row';
 

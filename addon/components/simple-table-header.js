@@ -4,8 +4,8 @@ import layout from '../templates/components/simple-table-header';
 export default Ember.Component.extend({
   layout,
   tagName: 'thead',
-  sortingCriteria: { key: null, order: null },
   columns: null,
+  sortingCriteria: { key: null, order: null },
 
   columnKeys: Ember.computed('columns', {
     get() {

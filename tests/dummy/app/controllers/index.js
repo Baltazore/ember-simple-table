@@ -19,7 +19,6 @@ export default Ember.Controller.extend({
     },
 
     selectRow(row) {
-      debugger;
       console.log(`Selected row ${row}`);
     }
   }

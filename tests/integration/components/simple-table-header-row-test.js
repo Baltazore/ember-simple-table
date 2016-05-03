@@ -20,7 +20,5 @@ test('renders for simple data header row with 2 cells from object', function(ass
 
   this.render(hbs`{{simple-table-header-row columns=columns}}`);
 
-  assert.equal(this.$('tr').length, 1, 'Creates 1 header row');
-  assert.equal(this.$('th').length, 3, 'Creates 3 header cells');
   assert.equal(this.$('.sortable').length, 3, 'Creates 3 sortable class cells');
 });
