@@ -1,11 +1,11 @@
 <h2> 1. Simple Table simple default config</h2>
 
-{{simple-table tData=model.tableData tColumns=model.tableColumns}}
+{{simple-table tData=model.data tColumns=model.columns}}
 
 <h2> 2. Simple Table with {{yield}} for body with default sort action</h2>
 
-{{#simple-table tData=model.tableData tColumns=model.tableColumns as |table|}}
-    {{table.header}}
+{{#simple-table tData=model.data tColumns=model.columns as |table|}}
+    {{table.header-row}}
 
     {{#table.body as |row|}}
         <tr>
@@ -15,41 +15,10 @@
     {{/table.body}}
 {{/simple-table}}
 
-<h2> 3. Simple Table with {{yield}} for header</h2>
+<h2> 3. Simple Table with custom tbody and sorting</h2>
 
-{{#simple-table tData=model.tableData tColumns=model.tableColumns sortAction=(action 'sort') as |table|}}
-    {{#table.header as |header|}}
-        {{header.cell dataValue='Foo' dataKey='foo'}}
-        {{header.cell dataValue='BaZ' dataKey='baz'}}
-    {{/table.header}}
-
-    {{table.body}}
-{{/simple-table}}
-
-<h2> 4. Simple Table with {{yield}} for header and rows</h2>
-
-{{#simple-table tData=model.tableData tColumns=model.tableColumns  as |table|}}
-    {{#table.header as |header|}}
-        {{#header.cell dataKey='foo' sortBy=(action 'sortFoo')}}
-            <div class="th"> Foo </div>
-        {{/header.cell}}
-        {{#header.cell dataValue='BaZ' dataKey='baz' sortBy=(action 'sortBaz') as |value| }}
-            <div class="th"> {{value}} </div>
-        {{/header.cell}}
-    {{/table.header}}
-
-    {{#table.body table=table as |row|}}
-        <tr>
-            <td>{{row.foo}}</td>
-            <td>{{row.baz}}</td>
-        </tr>
-    {{/table.body}}
-{{/simple-table}}
-
-<h2> 5. Simple Table with custom tbody and sorting</h2>
-
-{{#simple-table tData=model.tableData tColumns=model.tableColumns as |table|}}
-    {{table.header}}
+{{#simple-table tData=model.data tColumns=model.columns as |table|}}
+    {{table.header-row}}
 
     <tbody>
         {{#each table.rows as |row|}}
@@ -61,18 +30,9 @@
     </tbody>
 {{/simple-table}}
 
+<h2> 4. Simple Table with for header row</h2>
 
-<h2> 6. Simple Table with for header row</h2>
-
-{{#simple-table tData=model.tableData tColumns=model.complexColumns as |table|}}
-    {{table.header-row}}
-
-    {{table.body}}
-{{/simple-table}}
-
-<h2> 7. Simple Table with for header row</h2>
-
-{{#simple-table tData=model.tableData tColumns=model.complexColumns as |table|}}
+{{#simple-table tData=model.data tColumns=model.columns as |table|}}
     {{#table.header-selectable trClass="tr-class" thClass="th-class" selectAllAction=(action "selectAllRows") as |column|}}
         {{#if column.sortable}}
             <div class="blue-border {{column.sortingOrder}}" onclick={{column.sortAction}}>
