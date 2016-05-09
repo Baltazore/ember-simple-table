@@ -6,38 +6,15 @@ export default Ember.Component.extend({
   tagName: 'thead',
   columnsArray: null,
 
-  sortingCriteria: { key: null, order: null },
+  sortingCriteria: Ember.Object.create({}),
 
   didReceiveAttrs({oldAttrs, newAttrs}) {
     this._super(...arguments);
 
     if (!oldAttrs || oldAttrs.columns !== newAttrs.columns) {
       let columns      = this.get('columns');
-      let columnsArray = columns.map((item) => {
-        if (Ember.isArray(item)) {
-          let { style, classes } = item[0];
-          return { hasMultipleColumns: true, items: item, style, classes };
-        } else {
-          let { style, classes } = item;
-          return { hasMultipleColumns: false, items: item, style, classes };
-        }
-      });
+      let columnsArray = this._processColumns(columns);
       this.set('columnsArray', columnsArray);
-    }
-  },
-
-  orderForColumn(sortingKey) {
-    let { key, order } = this.get('sortingCriteria');
-
-    if (sortingKey === key) {
-      if (order === 'asc') {
-        return 'desc';
-      } else if (order === 'desc') {
-        return 'asc';
-      }
-    } else {
-      // Default to desc order
-      return 'desc';
     }
   },
 
@@ -46,10 +23,9 @@ export default Ember.Component.extend({
       let sortAction = this.get('sortAction');
       let sortBy     = this.get('sortBy');
 
-      let order    = this.orderForColumn(key);
-      let criteria = `${key}:${order}`;
+      this._setOrderForColumn(key);
 
-      this.set('sortingCriteria', { key, order });
+      let criteria = this._formatedCriteria();
 
       if (sortBy) {
         return sortBy(criteria);
@@ -57,5 +33,53 @@ export default Ember.Component.extend({
         return sortAction(criteria);
       }
     }
+  },
+
+  _processColumns(columns) {
+    return columns.map((item) => {
+      if (Ember.isArray(item)) {
+        let { style, classes } = item[0];
+        return { hasMultipleColumns: true, items: item, style, classes };
+      } else {
+        let { style, classes } = item;
+        return { hasMultipleColumns: false, items: item, style, classes };
+      }
+    });
+  },
+
+  _setOrderForColumn(sortingKey) {
+    let criteria = this.get('sortingCriteria');
+
+    let oldOrder = criteria.get(sortingKey);
+    let newOrder = this._toggleSortingOrder(oldOrder);
+    criteria.set(sortingKey, newOrder);
+   
+    return newOrder;
+  },
+
+  _toggleSortingOrder(order) {
+    switch(order) {
+    case null:
+      return 'asc';
+    case 'asc':
+      return 'desc';
+    case 'desc':
+      return null;
+    default:
+      return 'asc';
+    }
+  },
+
+  _formatedCriteria() {
+    let criteria = this.get('sortingCriteria');
+    let orderKeys = Object.keys(criteria);
+
+    return orderKeys.map((orderKey) => {
+      let order = criteria.get(orderKey);
+      if (order) {
+        return `${orderKey}:${order}`;
+      }
+    });
   }
+
 });

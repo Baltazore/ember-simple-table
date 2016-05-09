@@ -8,9 +8,12 @@ moduleForComponent('simple-table-header-selectable', 'Integration | Component | 
 test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
-  this.set('columns', ['foo', 'baz']);
+  this.set('columns', [
+    { key: 'foo', name: 'Foo' },
+    { key: 'baz', name: 'Baz' }
+  ]);
 
   this.render(hbs`{{simple-table-header-selectable columns=columns}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.notEqual(this.$().text().trim(), '');
 });

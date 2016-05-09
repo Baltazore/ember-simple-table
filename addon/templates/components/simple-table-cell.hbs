@@ -12,7 +12,7 @@
 
             {{#if (simple-table-sorting-enabled column)}}
                 <span class="sortable" onclick={{action 'sortBy' column.key}}>
-                    {{column.name}} <i class="sort-arrow {{simple-table-sorting-class sortingCriteria column.key}}"></i>
+                    {{column.name}} <i class="sort-arrow {{get sortingCriteria column.key}}"></i>
                 </span>
             {{else}}
                 <span> {{column.name}} </span>
@@ -35,7 +35,7 @@
 
             {{#if (simple-table-sorting-enabled column)}}
                 <span class="sortable" onclick={{action 'sortBy' column.key}}>
-                    {{column.name}} <i class="sort-arrow {{simple-table-sorting-class sortingCriteria column.key}}"></i>
+                    {{column.name}} <i class="sort-arrow {{get sortingCriteria column.key}}"></i>
                 </span>
             {{else}}
                 <span> {{column.name}} </span>
