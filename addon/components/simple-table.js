@@ -16,7 +16,7 @@ export default Ember.Component.extend({
       if (sortAction) {
         sortAction(criteria);
       } else {
-        this.set('sortingCriteria', [criteria]);
+        this.set('sortingCriteria', criteria);
       }
     }
   }

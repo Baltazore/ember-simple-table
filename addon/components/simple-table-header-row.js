@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   columnsArray: null,
 
   sortingCriteria: Ember.Object.create({}),
+  sortingCriteriaOrdered: Ember.A([]),
 
   didReceiveAttrs({oldAttrs, newAttrs}) {
     this._super(...arguments);
@@ -49,11 +50,15 @@ export default Ember.Component.extend({
 
   _setOrderForColumn(sortingKey) {
     let criteria = this.get('sortingCriteria');
+    let ordered = this.get('sortingCriteriaOrdered');
 
     let oldOrder = criteria.get(sortingKey);
     let newOrder = this._toggleSortingOrder(oldOrder);
     criteria.set(sortingKey, newOrder);
-   
+
+    ordered.removeObject(sortingKey);
+    ordered.insertAt(0, sortingKey);
+
     return newOrder;
   },
 
@@ -72,9 +77,9 @@ export default Ember.Component.extend({
 
   _formatedCriteria() {
     let criteria = this.get('sortingCriteria');
-    let orderKeys = Object.keys(criteria);
+    let ordered = this.get('sortingCriteriaOrdered');
 
-    return orderKeys.map((orderKey) => {
+    return ordered.map((orderKey) => {
       let order = criteria.get(orderKey);
       if (order) {
         return `${orderKey}:${order}`;
