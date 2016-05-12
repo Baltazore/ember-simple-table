@@ -4,6 +4,7 @@ import BaseHeaderRow from './simple-table-header-row';
 export default BaseHeaderRow.extend({
   layout,
 
+  checkBoxComponent: null, // injected component for first column
   isAllSelected: null, // injected
 
   actions: {
