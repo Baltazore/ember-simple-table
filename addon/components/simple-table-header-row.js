@@ -6,8 +6,15 @@ export default Ember.Component.extend({
   tagName: 'thead',
   columnsArray: null,
 
-  sortingCriteria: Ember.Object.create({}),
-  sortingCriteriaOrdered: Ember.A([]),
+  sortingCriteria: null,
+  sortingCriteriaOrdered: null,
+
+  init() {
+    this._super(...arguments);
+
+    this.set('sortingCriteriaOrdered', Ember.A([]));
+    this.set('sortingCriteria', Ember.Object.create({}));
+  },
 
   didReceiveAttrs({oldAttrs, newAttrs}) {
     this._super(...arguments);
@@ -57,7 +64,9 @@ export default Ember.Component.extend({
     criteria.set(sortingKey, newOrder);
 
     ordered.removeObject(sortingKey);
-    ordered.insertAt(0, sortingKey);
+    if (newOrder) {
+      ordered.insertAt(0, sortingKey);
+    }
 
     return newOrder;
   },
