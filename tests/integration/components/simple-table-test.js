@@ -128,8 +128,8 @@ test('it renders with simple data and apply multi-columns sort', function(assert
   assert.equal(this.$('tbody td:nth-child(even)').text(), 'abccabbca', 'Not sorted by String');
 
   this.$('th:last span').click();
-  assert.equal(this.$('tbody td:nth-child(odd)').text(), '132', 'Sorted by Number asc');
-  assert.equal(this.$('tbody td:nth-child(even)').text(), 'abcbcacab', 'Sorted by String asc');
+  assert.equal(this.$('tbody td:nth-child(odd)').text(), '123', 'Sorted by Number asc');
+  assert.equal(this.$('tbody td:nth-child(even)').text(), 'abccabbca', 'Not sorted by String');
 
   this.$('th:first span').click();
   assert.equal(this.$('tbody td:nth-child(odd)').text(), '321', 'Sorted by Number desc');

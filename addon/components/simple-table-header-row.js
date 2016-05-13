@@ -63,9 +63,10 @@ export default Ember.Component.extend({
     let newOrder = this._toggleSortingOrder(oldOrder);
     criteria.set(sortingKey, newOrder);
 
-    ordered.removeObject(sortingKey);
     if (newOrder) {
-      ordered.insertAt(0, sortingKey);
+      ordered.addObject(sortingKey);
+    } else {
+      ordered.removeObject(sortingKey);
     }
 
     return newOrder;
