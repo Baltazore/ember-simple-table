@@ -3,6 +3,7 @@
 
         {{#if hasBlock}}
             {{yield (hash
+              key=header.key
               name=column.name
               sortable=(simple-table-sorting-enabled column)
               sortOrder=(simple-table-sorting-class sortingCriteria column.key)
@@ -26,6 +27,7 @@
 
         {{#if hasBlock}}
             {{yield (hash
+              key=header.key
               name=column.name
               sortable=(simple-table-sorting-enabled column)
               sortOrder=(simple-table-sorting-class sortingCriteria column.key)
