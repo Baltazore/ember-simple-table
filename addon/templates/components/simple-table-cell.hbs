@@ -6,7 +6,7 @@
               key=header.key
               name=column.name
               sortable=(simple-table-sorting-enabled column)
-              sortOrder=(simple-table-sorting-class sortingCriteria column.key)
+              sortOrder=(get sortingCriteria column.key)
               sortAction=(action "sortBy" column.key)
               )}}
         {{else}}
@@ -30,7 +30,7 @@
               key=header.key
               name=column.name
               sortable=(simple-table-sorting-enabled column)
-              sortOrder=(simple-table-sorting-class sortingCriteria column.key)
+              sortOrder=(get sortingCriteria column.key)
               sortAction=(action "sortBy" column.key)
               )}}
         {{else}}

@@ -1,0 +1,11 @@
+{{#if hasBlock}}
+    {{yield (hash
+      items=sorts
+      removeSortBy=(action "removeSort")
+      setNewCriteria=(action "setNewCriteria")
+      )}}
+{{else}}
+    {{#each sorts as |column|}}
+        <span {{action "removeSort" column.criteria}}>{{column.name}} {{column.order}} x</span>
+    {{/each}}
+{{/if}}

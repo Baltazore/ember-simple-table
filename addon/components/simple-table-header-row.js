@@ -7,14 +7,6 @@ export default Ember.Component.extend({
   columnsArray: null,
 
   sortingCriteria: null,
-  sortingCriteriaOrdered: null,
-
-  init() {
-    this._super(...arguments);
-
-    this.set('sortingCriteriaOrdered', Ember.A([]));
-    this.set('sortingCriteria', Ember.Object.create({}));
-  },
 
   didReceiveAttrs({oldAttrs, newAttrs}) {
     this._super(...arguments);
@@ -31,14 +23,10 @@ export default Ember.Component.extend({
       let sortAction = this.get('sortAction');
       let sortBy     = this.get('sortBy');
 
-      this._setOrderForColumn(key);
-
-      let criteria = this._formatedCriteria();
-
       if (sortBy) {
-        return sortBy(criteria);
+        return sortBy(key);
       } else {
-        return sortAction(criteria);
+        return sortAction(key);
       }
     }
   },
@@ -53,48 +41,5 @@ export default Ember.Component.extend({
         return { hasMultipleColumns: false, items: item, style, classes };
       }
     });
-  },
-
-  _setOrderForColumn(sortingKey) {
-    let criteria = this.get('sortingCriteria');
-    let ordered = this.get('sortingCriteriaOrdered');
-
-    let oldOrder = criteria.get(sortingKey);
-    let newOrder = this._toggleSortingOrder(oldOrder);
-    criteria.set(sortingKey, newOrder);
-
-    if (newOrder) {
-      ordered.addObject(sortingKey);
-    } else {
-      ordered.removeObject(sortingKey);
-    }
-
-    return newOrder;
-  },
-
-  _toggleSortingOrder(order) {
-    switch(order) {
-    case null:
-      return 'asc';
-    case 'asc':
-      return 'desc';
-    case 'desc':
-      return null;
-    default:
-      return 'asc';
-    }
-  },
-
-  _formatedCriteria() {
-    let criteria = this.get('sortingCriteria');
-    let ordered = this.get('sortingCriteriaOrdered');
-
-    return ordered.map((orderKey) => {
-      let order = criteria.get(orderKey);
-      if (order) {
-        return `${orderKey}:${order}`;
-      }
-    });
   }
-
 });

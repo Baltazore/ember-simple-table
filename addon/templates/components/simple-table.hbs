@@ -1,12 +1,25 @@
 {{#if hasBlock}}
-    {{yield (hash
-      header-row=(component "simple-table-header-row" columns=tColumns sortAction=(action "sortBy"))
-      header-selectable=(component "simple-table-header-selectable" columns=tColumns sortAction=(action "sortBy"))
-      body=(component "simple-table-body" columns=tColumns rows=tRows)
-      rows=tRows
-      )
-    }}
+  {{yield (hash
+    sort-row=(component "simple-table-sort-row"
+      criteria=sortingCriteria
+      removeSortOption=(action "removeSortOption")
+      setNewCriteria=(action "setNewCriteria")
+    )
+    header-row=(component "simple-table-header-row"
+      sortingCriteria=sortingCriteria
+      columns=tColumns
+      sortAction=(action "sortBy")
+    )
+    header-selectable=(component "simple-table-header-selectable"
+      sortingCriteria=sortingCriteria
+      columns=tColumns
+      sortAction=(action "sortBy")
+    )
+    body=(component "simple-table-body" columns=tColumns rows=tRows)
+    rows=tRows
+    )
+  }}
 {{else}}
-    {{simple-table-header-row columns=tColumns sortAction=(action "sortBy")}}
-    {{simple-table-body columns=tColumns rows=tRows}}
+  {{simple-table-header-row columns=tColumns sortingCriteria=sortingCriteria sortAction=(action "sortBy")}}
+  {{simple-table-body columns=tColumns rows=tRows}}
 {{/if}}
