@@ -1,49 +1,9 @@
 {{#if columns.hasMultipleColumns}}
-    {{#each columns.items as |column|}}
-
-        {{#if hasBlock}}
-            {{yield (hash
-              key=header.key
-              name=column.name
-              sortable=(simple-table-sorting-enabled column)
-              sortOrder=(get sortingCriteria column.key)
-              sortAction=(action "sortBy" column.key)
-              )}}
-        {{else}}
-
-            {{#if (simple-table-sorting-enabled column)}}
-                <span class="sortable" onclick={{action 'sortBy' column.key}}>
-                    {{column.name}} <i class="sort-arrow {{get sortingCriteria column.key}}"></i>
-                </span>
-            {{else}}
-                <span> {{column.name}} </span>
-            {{/if}}
-
-        {{/if}}
-
-    {{/each}}
+  {{#each columns.items as |column|}}
+    {{simple-table-cell-item column=column criteria=sortingCriteria sortAction=(action "sortBy")}}
+  {{/each}}
 {{else}}
-    {{#with columns.items as |column| }}
-
-        {{#if hasBlock}}
-            {{yield (hash
-              key=header.key
-              name=column.name
-              sortable=(simple-table-sorting-enabled column)
-              sortOrder=(get sortingCriteria column.key)
-              sortAction=(action "sortBy" column.key)
-              )}}
-        {{else}}
-
-            {{#if (simple-table-sorting-enabled column)}}
-                <span class="sortable" onclick={{action 'sortBy' column.key}}>
-                    {{column.name}} <i class="sort-arrow {{get sortingCriteria column.key}}"></i>
-                </span>
-            {{else}}
-                <span> {{column.name}} </span>
-            {{/if}}
-
-        {{/if}}
-
-    {{/with}}
+  {{#with columns.items as |column| }}
+    {{simple-table-cell-item column=column criteria=sortingCriteria sortAction=(action "sortBy")}}
+  {{/with}}
 {{/if}}

@@ -1,0 +1,19 @@
+{{#if hasBlock}}
+  {{yield (hash
+    key=column.key
+    name=column.name
+    sortable=sortable
+    sortOrder=sortOrder
+    sortAction=(action "sortBy" column.key)
+    )}}
+{{else}}
+  {{#if sortable}}
+
+    <span class="sortable" onclick={{action 'sortBy' column.key}}>
+      {{column.name}} <i class="sort-arrow {{sortOrder}}"></i>
+    </span>
+
+  {{else}}
+    <span> {{column.name}} </span>
+  {{/if}}
+{{/if}}

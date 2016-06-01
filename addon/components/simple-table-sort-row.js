@@ -16,12 +16,12 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    removeSort(criteria) {
-      this.get('removeSortOption')(criteria);
+    removeSort(item) {
+      this.get('removeSortOption')(item);
     },
 
-    setNewCriteria(items) {
-      this.get('setNewCriteria')(items);
+    reorderCriteria(items) {
+      this.get('reorderCriteria')(items);
     }
   }
 });

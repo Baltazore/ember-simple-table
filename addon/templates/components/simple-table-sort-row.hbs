@@ -2,7 +2,7 @@
     {{yield (hash
       items=sorts
       removeSortBy=(action "removeSort")
-      setNewCriteria=(action "setNewCriteria")
+      reorderCriteria=(action "reorderCriteria")
       )}}
 {{else}}
     {{#each sorts as |column|}}

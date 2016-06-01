@@ -1,13 +1,13 @@
 import Ember from 'ember';
 import layout from '../templates/components/simple-table';
 
-const { A: emberA } = Ember;
+const { A: emberA, computed, get, set } = Ember;
 
 export default Ember.Component.extend({
   layout,
   tagName: 'table',
 
-  sorting: Ember.computed('sortingCriteria.[]', {
+  sorting: computed('sortingCriteria.[]', {
     get() {
       return this.get('sortingCriteria')
         .filterBy('order')
@@ -35,42 +35,49 @@ export default Ember.Component.extend({
     this.set('sortingCriteria', criteria);
   },
 
-  tRows: Ember.computed.sort('tData', 'sorting'),
+  tRows: computed.sort('tData', 'sorting'),
 
   actions: {
     sortBy(key) {
-      let sortAction = this.get('sortAction');
+      let sortAction = get(this, 'sortAction');
 
       this._setOrderForColumn(key);
 
       if (sortAction) {
-        let criteria = this.get('sortingCriteria');
+        let criteria = get(this, 'sortingCriteria');
         sortAction(criteria);
       }
     },
 
-    removeSortOption(criteria) {
-      let sortCriteria = this.get('sortingCriteria');
-
-      let oldCritera = sortCriteria.find((key) => criteria.key);
-      Ember.set(oldCriteria, 'order', null);
+    removeSortOption(item) {
+      let sortCriteria = get(this, 'sortingCriteria');
+      let oldCriteria = sortCriteria.find(({ key }) => key === get(item, 'key'));
+      sortCriteria.removeObject(oldCriteria);
+      set(oldCriteria, 'order', null);
+      sortCriteria.pushObject(oldCriteria);
     },
 
-    setNewCriteria(criteria) {
-      this.set('sortingCriteria', criteria);
+    reorderCriteria(newOrder) {
+      let criteria = get(this, 'sortingCriteria');
+      let reordered = newOrder.map((item) => {
+        return criteria.find(({ key }) => key === get(item, 'key'));
+      });
+
+      criteria.removeObjects(reordered);
+      criteria.pushObjects(reordered);
     }
   },
 
   _setOrderForColumn(sortingKey) {
     let oldOrder = null;
-    let criteria = this.get('sortingCriteria');
+    let criteria = get(this, 'sortingCriteria');
     let oldCriteria = criteria.find(({ key }) => key === sortingKey);
 
-    oldOrder = Ember.get(oldCriteria, 'order');
+    oldOrder = get(oldCriteria, 'order');
     criteria.removeObject(oldCriteria);
 
     let newOrder = this._toggleSortingOrder(oldOrder);
-    Ember.set(oldCriteria, 'order', newOrder);
+    set(oldCriteria, 'order', newOrder);
     criteria.pushObject(oldCriteria);
   },
 
