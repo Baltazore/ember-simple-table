@@ -1,11 +1,13 @@
-{{#each rows as |rowData| }}
+{{#as-scrollable as |scroll|}}
+  {{#each  (compute scroll.update rows) as |rowData| }}
     {{#if hasBlock}}
-        {{yield rowData}}
+      {{yield rowData}}
     {{else}}
-        <tr>
-            {{#each columnKeys as |column| }}
-                <td>{{get rowData column}}</td>
-            {{/each}}
-        </tr>
+      <tr>
+        {{#each columnKeys as |column| }}
+          <td>{{get rowData column}}</td>
+        {{/each}}
+      </tr>
     {{/if}}
-{{/each}}
+  {{/each}}
+{{/as-scrollable}}

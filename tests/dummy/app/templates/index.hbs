@@ -1,63 +1,82 @@
-<h2> 1. Simple Table simple default config</h2>
+<section>
+  <h2> 1. Simple Table simple default config</h2>
 
-{{simple-table tData=model.data tColumns=model.columns}}
+  {{simple-table tData=model.data tColumns=model.columns}}
+</section>
 
-<h2> 2. Simple Table with {{yield}} for body with default sort action</h2>
+<section>
+  <h2> 2. Simple Table with {{yield}} for body with default sort action</h2>
 
-{{#simple-table tData=model.data tColumns=model.columns as |table|}}
+  {{#simple-table tData=model.data tColumns=model.columns as |table|}}
     {{table.header-row}}
 
     {{#table.body as |row|}}
-        <tr>
-            <td>{{row.foo}}</td>
-            <td>{{row.baz}}</td>
-        </tr>
+      <tr>
+        <td>{{row.foo}}</td>
+        <td>{{row.baz}}</td>
+      </tr>
     {{/table.body}}
-{{/simple-table}}
+  {{/simple-table}}
+</section>
 
-<h2> 3. Simple Table with custom tbody and sorting</h2>
+<section>
+  <h2> 3. Simple Table with custom tbody and sorting</h2>
 
-{{#simple-table tData=model.data tColumns=model.columns as |table|}}
+  {{#simple-table tData=model.data tColumns=model.columns as |table|}}
     {{table.header-row}}
 
     <tbody>
-        {{#each table.rows as |row|}}
-            <tr>
-                <td>{{row.foo}}</td>
-                <td>{{row.baz}}</td>
-            </tr>
-        {{/each}}
+      {{#each table.rows as |row|}}
+        <tr>
+          <td>{{row.foo}}</td>
+          <td>{{row.baz}}</td>
+        </tr>
+      {{/each}}
     </tbody>
-{{/simple-table}}
+  {{/simple-table}}
+</section>
 
-<h2> 4. Simple Table with for header row</h2>
+<section>
+  <h2> 4. Simple Table with for header row</h2>
 
-{{#simple-table tData=model.data tColumns=model.columns as |table|}}
+  {{#simple-table tData=model.data tColumns=model.columns as |table|}}
     {{#table.header-selectable selectAllAction=(action "selectAllRows") as |header|}}
-        {{header.column}}
+      {{header.column}}
     {{/table.header-selectable}}
 
     <tbody>
-        {{#each table.rows as |row|}}
-            <tr>
-                <td>
-                    <input type="checkbox" checked={{row.checked}} value={{row.foo}} onchange={{action "selectRow" value="target.value"}}>
-                </td>
-                <td>{{row.foo}}</td>
-                <td>{{row.baz}}</td>
-            </tr>
-        {{/each}}
+      {{#each table.rows as |row|}}
+        <tr>
+          <td>
+            <input type="checkbox" checked={{row.checked}} value={{row.foo}} onchange={{action "selectRow" value="target.value"}}>
+          </td>
+          <td>{{row.foo}}</td>
+          <td>{{row.baz}}</td>
+        </tr>
+      {{/each}}
     </tbody>
-{{/simple-table}}
+  {{/simple-table}}
+</section>
 
-<h2> 5. Simple Table with sort row</h2>
+<section>
+  <h2> 5. Simple Table with sort row</h2>
 
-{{#simple-table tData=model.data tColumns=model.columns as |table|}}
+  {{#simple-table tData=model.data tColumns=model.columns as |table|}}
     {{#table.sort-row as |sortRow|}}
-        {{#each sortRow.items as |item|}}
-            {{item.name}}
-        {{/each}}
+      {{#each sortRow.items as |item|}}
+        {{item.name}}
+      {{/each}}
     {{/table.sort-row}}
     {{table.header-row}}
     {{table.body}}
-{{/simple-table}}
+  {{/simple-table}}
+</section>
+
+<section>
+  <h2> 6. Simple Table with scrolling</h2>
+
+  {{#simple-table tData=model.longData tColumns=model.columns as |table|}}
+    {{table.header-row}}
+    {{table.body}}
+  {{/simple-table}}
+</section>

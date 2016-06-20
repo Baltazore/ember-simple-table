@@ -9,3 +9,11 @@
 .blue-border {
   border: 1px solid blue;
 }
+
+section {
+  height: 12vh;
+}
+
+.as-scrollable {
+  height: 100px;
+}
