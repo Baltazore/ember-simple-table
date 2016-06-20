@@ -17,9 +17,8 @@
     )
     body=(component "simple-table-body" columns=tColumns rows=tRows)
     rows=tRows
-    )
-  }}
+  )}}
 {{else}}
   {{simple-table-header-row columns=tColumns sortingCriteria=sortingCriteria sortAction=(action "sortBy")}}
-  {{simple-table-body columns=tColumns rows=tRows}}
+  {{simple-table-body scroll=scroll columns=tColumns rows=tRows}}
 {{/if}}

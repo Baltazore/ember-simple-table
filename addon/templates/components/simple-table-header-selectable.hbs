@@ -1,18 +1,18 @@
 {{#if checkBoxComponent}}
-    {{component checkBoxComponent }}
+  {{component checkBoxComponent }}
 {{else}}
-    <th class="{{thClass}}">
-        <input type="checkbox" checked={{isAllSelected}} onchange={{action "selectAll" value="target.checked"}}>
-    </th>
+  <th class="{{thClass}}">
+    <input type="checkbox" checked={{isAllSelected}} onchange={{action "selectAll" value="target.checked"}}>
+  </th>
 {{/if}}
 
 {{#each columnsArray as |column| }}
-    {{#if hasBlock}}
-        {{yield (hash
-          column=(component "simple-table-cell" columns=column sortingCriteria=sortingCriteria sortAction=(action 'sortBy'))
-          )}}
-    {{else}}
-        {{simple-table-cell columns=column sortingCriteria=sortingCriteria sortAction=(action 'sortBy')}}
-    {{/if}}
+  {{#if hasBlock}}
+    {{yield (hash
+      column=(component "simple-table-cell" columns=column sortingCriteria=sortingCriteria sortAction=(action 'sortBy'))
+      )}}
+  {{else}}
+    {{simple-table-cell columns=column sortingCriteria=sortingCriteria sortAction=(action 'sortBy')}}
+  {{/if}}
 
 {{/each}}
