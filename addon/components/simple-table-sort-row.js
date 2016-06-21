@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   layout,
   tagName: 'caption',
 
-  criteria: null,
+  criteria: Ember.A([]),
 
   sorts: Ember.computed('criteria.[]', {
     get() {

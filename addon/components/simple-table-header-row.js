@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   tagName: 'thead',
   columnsArray: null,
 
-  sortingCriteria: null,
+  sortingCriteria: Ember.A([]),
 
   didReceiveAttrs({oldAttrs, newAttrs}) {
     this._super(...arguments);

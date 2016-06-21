@@ -7,6 +7,22 @@ export default Ember.Component.extend({
   layout,
   tagName: 'table',
 
+  sortingCriteria: computed('tColumns', {
+    get() {
+      let columns = this.get('tColumns');
+      return columns.reduce((reducer, item) => {
+        if (Ember.isArray(item)) {
+          item.forEach((i) => {
+            reducer.pushObject({ key: i.key, name: i.name, order: null });
+          });
+        } else {
+          reducer.pushObject({ key: item.key, name: item.name, order: null });
+        }
+        return reducer;
+      }, emberA([]));
+    }
+  }),
+
   sorting: computed('sortingCriteria.[]', {
     get() {
       return this.get('sortingCriteria')
@@ -14,26 +30,6 @@ export default Ember.Component.extend({
         .map(({ key, order }) => `${key}:${order}`);
     }
   }),
-
-  sortingCriteria: null,
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-
-    let columns = this.get('tColumns');
-    let criteria = columns.reduce((reducer, item) => {
-      if (Ember.isArray(item)) {
-        item.forEach((i) => {
-          reducer.pushObject({ key: i.key, name: i.name, order: null });
-        });
-      } else {
-        reducer.pushObject({ key: item.key, name: item.name, order: null });
-      }
-      return reducer;
-    }, emberA([]));
-
-    this.set('sortingCriteria', criteria);
-  },
 
   tRows: computed.sort('tData', 'sorting'),
 
@@ -69,16 +65,26 @@ export default Ember.Component.extend({
   },
 
   _setOrderForColumn(sortingKey) {
-    let oldOrder = null;
+    let oldPosition = null;
     let criteria = get(this, 'sortingCriteria');
     let oldCriteria = criteria.find(({ key }) => key === sortingKey);
 
-    oldOrder = get(oldCriteria, 'order');
+    let oldOrder = get(oldCriteria, 'order');
+    // Save oldPosition only if we already sorted by this column previously
+    if (oldOrder) {
+      oldPosition = criteria.indexOf(oldCriteria);
+    }
     criteria.removeObject(oldCriteria);
 
     let newOrder = this._toggleSortingOrder(oldOrder);
     set(oldCriteria, 'order', newOrder);
-    criteria.pushObject(oldCriteria);
+    if (oldPosition !== null) {
+      criteria.insertAt(oldPosition, oldCriteria);
+    } else {
+      criteria.pushObject(oldCriteria);
+    }
+
+    console.log(this.get('sorting'));
   },
 
   _toggleSortingOrder(order) {

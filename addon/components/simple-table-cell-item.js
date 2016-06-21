@@ -1,13 +1,13 @@
 import Ember from 'ember';
 import layout from '../templates/components/simple-table-cell-item';
 
-const { get, computed } = Ember;
+const { get, computed, A: emArray } = Ember;
 
 export default Ember.Component.extend({
   layout,
   tagName: "",
   column: null,
-  criteria: null,
+  criteria: emArray([]),
 
   sortable: computed('column', {
     get() {
@@ -20,7 +20,10 @@ export default Ember.Component.extend({
       let columnKey = get(this, 'column.key');
       let criteria = get(this, 'criteria').find(({ key }) => key === columnKey);
 
-      return get(criteria, 'order');
+      if (criteria) {
+        return get(criteria, 'order');
+      }
+      return null;
     }
   }),
 

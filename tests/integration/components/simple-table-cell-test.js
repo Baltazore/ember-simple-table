@@ -7,7 +7,7 @@ moduleForComponent('simple-table-cell', 'Integration | Component | simple table 
 
 test('it renders with sorting arrow', function(assert) {
   this.set('column', { items: { key: 'baz', name: "Baz" } });
-  this.set('sorting', { key: 'baz', order: 'asc'});
+  this.set('sorting', [{ key: 'baz', order: 'asc'}]);
 
   this.render(hbs`
     {{simple-table-cell columns=column sortingCriteria=sorting }}
@@ -21,7 +21,7 @@ test('it renders with sorting arrow', function(assert) {
 
 test('it renders without sorting arrow', function(assert) {
   this.set('column', { items: { key: 'baz', name: "Baz", sortable: false } });
-  this.set('sorting', { key: 'baz', order: 'asc'});
+  this.set('sorting', [{ key: 'baz', order: 'asc'}]);
 
   this.render(hbs`
     {{simple-table-cell columns=column sortingCriteria=sorting }}
@@ -38,7 +38,7 @@ test('it renders 2 spans for complex header cell', function(assert) {
     { key: 'baz', name: "Baz", sortable: false },
     { key: 'foo', name: "Foo" }
   ] });
-  this.set('sorting', { key: 'baz', order: 'asc'});
+  this.set('sorting', [{ key: 'baz', order: 'asc'}]);
 
   this.render(hbs`
     {{simple-table-cell columns=column sortingCriteria=sorting }}
