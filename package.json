@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/Baltazore/ember-simple-table.git",
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -45,7 +45,7 @@
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-babel": "^5.1.6",
     "ember-element-resize-detector": "0.1.1",
-    "ember-scrollable": "0.3.0"
+    "ember-scrollable": "git://github.com/Baltazore/ember-scrollable/#fix-scrollbar-height"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
