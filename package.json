@@ -44,7 +44,8 @@
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-babel": "^5.1.6",
-    "ember-scrollable": "git://github.com/Baltazore/ember-scrollable/#fix-scrollbar-height"
+    "ember-element-resize-detector": "0.1.1",
+    "ember-scrollable": "0.3.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
