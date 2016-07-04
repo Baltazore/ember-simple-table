@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  sorting: computed('sortingCriteria.[]', {
+  sorting: computed('sortingCriteria.[]', 'tData.[]', {
     get() {
       return this.get('sortingCriteria')
         .filterBy('order')
