@@ -1,11 +1,13 @@
 import Ember from 'ember';
 import layout from '../templates/components/simple-table';
 
-const { A: emberA, computed, get, set } = Ember;
+const { A: emberA, computed, get, set, isEmpty } = Ember;
 
 export default Ember.Component.extend({
   layout,
   tagName: 'table',
+
+  defaultSorting: null, // injected
 
   sortingCriteria: computed('tColumns', {
     get() {
@@ -25,9 +27,16 @@ export default Ember.Component.extend({
 
   sorting: computed('sortingCriteria.[]', 'tData.[]', {
     get() {
-      return this.get('sortingCriteria')
+      let sortingCriteria = this.get('sortingCriteria')
         .filterBy('order')
         .map(({ key, order }) => `${key}:${order}`);
+
+      let defaultSorting = get(this, 'defaultSorting');
+      if (! isEmpty(defaultSorting)) {
+        sortingCriteria.push(defaultSorting);
+      }
+
+      return sortingCriteria;
     }
   }),
 

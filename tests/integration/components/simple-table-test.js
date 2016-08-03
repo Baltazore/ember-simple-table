@@ -9,7 +9,10 @@ test('it renders with simple data', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.set('tableData', [{ foo: 'bar', baz: 'boo' }]);
+  this.set('tableData', [
+    { foo: 'bar1', baz: 'boo1' },
+    { foo: 'bar2', baz: 'boo2' }
+  ]);
   this.set('tableColumns', [
     { key: 'baz', name: "Baz", sortable: false, class: '' },
     { key: 'foo', name: "Foo", sortable: true, class: '' }
@@ -26,9 +29,9 @@ test('it renders with simple data', function(assert) {
   assert.equal(this.$('th:first').text().trim(), 'Baz');
   assert.equal(this.$('th:last').text().trim(), 'Foo');
 
-  assert.equal(this.$('td').length, 2, 'Creates table cell');
-  assert.equal(this.$('td:first').text().trim(), 'boo');
-  assert.equal(this.$('td:last').text().trim(), 'bar');
+  assert.equal(this.$('td').length, 4, 'Creates table cell');
+  assert.equal(this.$('td:first').text().trim(), 'boo1');
+  assert.equal(this.$('td:last').text().trim(), 'bar2');
 });
 
 test('it renders with simple data and yield table data', function(assert) {
@@ -99,6 +102,32 @@ test('it renders with simple data and yield table data', function(assert) {
   assert.equal(this.$('td').length, 2, 'Creates table cell');
   assert.equal(this.$('td:first').text().trim(), 'boo');
   assert.equal(this.$('td:last').text().trim(), 'bar');
+});
+
+test('it renders with simple data and apply defaultSorting', function(assert) {
+  // Set any properties with this.set('myProperty', 'value');
+  // Handle any actions with this.on('myAction', function(val) { ... });
+
+  this.set('tableData', [
+    { foo: 3, baz: 'bca' },
+    { foo: 1, baz: 'abc' },
+    { foo: 2, baz: 'cab' }
+  ]);
+  this.set('tableColumns', [
+    { key: 'foo', name: "Number" },
+    { key: 'baz', name: "String" }
+  ]);
+
+  this.render(hbs`
+    {{simple-table tData=tableData tColumns=tableColumns defaultSorting='foo:desc' }}
+  `);
+
+  assert.equal(this.$('th').length, 2, 'Creates table header cell');
+  assert.equal(this.$('th:first').text().trim(), 'Number');
+  assert.equal(this.$('th:last').text().trim(), 'String');
+
+  assert.equal(this.$('tbody td:nth-child(odd)').text(), '321', 'Sorted by Number desc');
+  assert.equal(this.$('tbody td:nth-child(even)').text(), 'bcacababc', 'Not sorted by String');
 });
 
 test('it renders with simple data and apply multi-columns sort', function(assert) {
