@@ -5,7 +5,7 @@ moduleForComponent('simple-table-body', 'Integration | Component | simple table 
   integration: true
 });
 
-test('it renders', function(assert) {
+test('it renders with simple component', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
@@ -15,6 +15,15 @@ test('it renders', function(assert) {
   this.render(hbs`{{simple-table-body columns=columns rows=rows}}`);
 
   assert.notEqual(this.$().text().trim(), '');
+  assert.equal(this.$('tbody').length, 1);
+});
+
+test('it renders with block usage', function(assert) {
+  // Set any properties with this.set('myProperty', 'value');
+  // Handle any actions with this.on('myAction', function(val) { ... });
+
+  this.set('rows', [{ foo: 'bar', baz: 'boo' }]);
+  this.set('columns', ['foo', 'baz']);
 
   // Template block usage:
   this.render(hbs`
@@ -25,4 +34,6 @@ test('it renders', function(assert) {
   `);
 
   assert.notEqual(this.$().text().trim(), '');
+  assert.equal(this.$('tbody').length, 1);
 });
+
