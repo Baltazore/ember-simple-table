@@ -1,4 +1,4 @@
-{{#as-scrollable as |scroll|}}
+{{#ember-scrollable as |scroll|}}
   {{#each  (compute scroll.update rows) as |rowData| }}
     {{#if hasBlock}}
       {{yield rowData}}
@@ -10,4 +10,4 @@
       </tr>
     {{/if}}
   {{/each}}
-{{/as-scrollable}}
+{{/ember-scrollable}}
