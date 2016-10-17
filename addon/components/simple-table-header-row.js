@@ -4,19 +4,8 @@ import layout from '../templates/components/simple-table-header-row';
 export default Ember.Component.extend({
   layout,
   tagName: 'thead',
-  columnsArray: null,
 
   sortingCriteria: Ember.A([]),
-
-  didReceiveAttrs({oldAttrs, newAttrs}) {
-    this._super(...arguments);
-
-    if (!oldAttrs || oldAttrs.columns !== newAttrs.columns) {
-      let columns      = this.get('columns');
-      let columnsArray = this._processColumns(columns);
-      this.set('columnsArray', columnsArray);
-    }
-  },
 
   actions: {
     sortBy(key) {
@@ -29,17 +18,5 @@ export default Ember.Component.extend({
         return sortAction(key);
       }
     }
-  },
-
-  _processColumns(columns) {
-    return columns.map((item) => {
-      if (Ember.isArray(item)) {
-        let { style, classes } = item[0];
-        return { hasMultipleColumns: true, items: item, style, classes };
-      } else {
-        let { style, classes } = item;
-        return { hasMultipleColumns: false, items: item, style, classes };
-      }
-    });
   }
 });

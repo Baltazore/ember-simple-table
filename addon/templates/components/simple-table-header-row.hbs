@@ -1,4 +1,4 @@
-{{#each columnsArray as |column| }}
+{{#each columns as |column| }}
   {{#if hasBlock}}
     {{yield (hash
       column=(component "simple-table-cell" columns=column sortingCriteria=sortingCriteria sortAction=(action 'sortBy'))
