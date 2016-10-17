@@ -1,9 +1,15 @@
-{{#if columns.hasMultipleColumns}}
-  {{#each columns.items as |column|}}
-    {{simple-table-cell-item column=column criteria=sortingCriteria sortAction=(action "sortBy")}}
+{{#if (is-array columns)}}
+  {{#each columns as |column|}}
+    {{#if (is-array column)}}
+      <span class="simple-table-column-group">
+      {{#each column as |item| }}
+        {{simple-table-cell-item column=item criteria=sortingCriteria sortAction=(action "sortBy")}}
+      {{/each}}
+      </span>
+    {{else}}
+      {{simple-table-cell-item column=column criteria=sortingCriteria sortAction=(action "sortBy")}}
+    {{/if}}
   {{/each}}
 {{else}}
-  {{#with columns.items as |column| }}
-    {{simple-table-cell-item column=column criteria=sortingCriteria sortAction=(action "sortBy")}}
-  {{/with}}
+  {{simple-table-cell-item column=columns criteria=sortingCriteria sortAction=(action "sortBy")}}
 {{/if}}

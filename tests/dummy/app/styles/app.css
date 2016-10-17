@@ -10,6 +10,7 @@
   border: 1px solid blue;
 }
 
-.as-scrollable {
+.ember-scrollable {
   height: 100px;
+  width: 85px;
 }
