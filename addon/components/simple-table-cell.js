@@ -8,10 +8,18 @@ export default Ember.Component.extend({
   classNameBindings: ['columnsClass'],
   attributeBindings: ['rowspan', 'colspan', 'columnsStyle:style'],
 
-  columnsClass: Ember.computed.alias('columns.classes'),
+  columnsClass: Ember.computed('columns.classes', {
+    get() {
+      let columns = this.get('columns');
+      let column = Ember.isArray(columns) ? columns[0] : columns;
+      return Ember.String.htmlSafe(column.classes);
+    }
+  }),
   columnsStyle: Ember.computed('columns.style', {
     get() {
-      return Ember.String.htmlSafe(this.get('columns.style'));
+      let columns = this.get('columns');
+      let column = Ember.isArray(columns) ? columns[0] : columns;
+      return Ember.String.htmlSafe(column.style);
     }
   }),
 
