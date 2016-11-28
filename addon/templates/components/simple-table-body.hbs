@@ -1,4 +1,4 @@
-{{#ember-scrollable as |scroll|}}
+{{#ember-scrollable scrollTo=scrollTo onScroll=onScroll as |scroll|}}
   {{#each  (compute scroll.update rows) as |rowData| }}
     {{#if hasBlock}}
       {{yield rowData}}
