@@ -25,14 +25,14 @@ export default Ember.Component.extend({
     }
   }),
 
-  sorting: computed('sortingCriteria.[]', 'tData.[]', defaultSorting, {
+  sorting: computed('sortingCriteria.[]', 'tData.[]', 'defaultSorting', {
     get() {
       let sortingCriteria = this.get('sortingCriteria')
         .filterBy('order')
         .map(({ key, order }) => `${key}:${order}`);
 
       let defaultSorting = get(this, 'defaultSorting');
-      if (! isEmpty(defaultSorting)) {
+      if (!isEmpty(defaultSorting)) {
         sortingCriteria.push(defaultSorting);
       }
 
@@ -97,15 +97,15 @@ export default Ember.Component.extend({
   },
 
   _toggleSortingOrder(order) {
-    switch(order) {
-    case null:
-      return 'asc';
-    case 'asc':
-      return 'desc';
-    case 'desc':
-      return null;
-    default:
-      return 'asc';
+    switch (order) {
+      case null:
+        return 'asc';
+      case 'asc':
+        return 'desc';
+      case 'desc':
+        return null;
+      default:
+        return 'asc';
     }
   }
 });
