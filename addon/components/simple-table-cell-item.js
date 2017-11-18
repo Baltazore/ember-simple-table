@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed, get } from '@ember/object';
+import { A as emArray } from '@ember/array';
 import layout from '../templates/components/simple-table-cell-item';
 
-const { get, computed, A: emArray } = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: "",
   column: null,

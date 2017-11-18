@@ -1,13 +1,15 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
+import Component from '@ember/component';
 import layout from '../templates/components/simple-table-sort-row';
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'caption',
 
-  criteria: Ember.A([]),
+  criteria: A([]),
 
-  sorts: Ember.computed('criteria.[]', {
+  sorts: computed('criteria.[]', {
     get() {
       let criteria = this.get('criteria');
 

@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   actions: {
     sort(criteria) {
       console.log('sorting with criteria', criteria);

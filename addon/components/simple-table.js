@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import { sort } from '@ember/object/computed';
+import Component from '@ember/component';
+import { A as emberA, isArray } from '@ember/array';
+import { set, get, computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
 import layout from '../templates/components/simple-table';
 
-const { A: emberA, computed, get, set, isEmpty } = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'table',
 
@@ -13,7 +15,7 @@ export default Ember.Component.extend({
     get() {
       let columns = this.get('tColumns');
       return columns.reduce((reducer, item) => {
-        if (Ember.isArray(item)) {
+        if (isArray(item)) {
           item.forEach((i) => {
             reducer.pushObject({ key: i.key, name: i.name, order: null });
           });
@@ -40,7 +42,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  tRows: computed.sort('tData', 'sorting'),
+  tRows: sort('tData', 'sorting'),
 
   actions: {
     sortBy(key) {
@@ -92,8 +94,6 @@ export default Ember.Component.extend({
     } else {
       criteria.pushObject(oldCriteria);
     }
-
-    console.log(this.get('sorting'));
   },
 
   _toggleSortingOrder(order) {
