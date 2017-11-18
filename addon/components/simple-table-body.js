@@ -1,5 +1,5 @@
 import { isArray } from '@ember/array';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 import Component from '@ember/component';
 import layout from '../templates/components/simple-table-body';
 
@@ -9,7 +9,7 @@ export default Component.extend({
 
   columnKeys: computed('columns', {
     get() {
-      let columns = this.get('columns');
+      let columns = get(this, 'columns');
       if (isArray(columns)) {
         if (columns[0].key) {
           return columns.map((item) => item.key);

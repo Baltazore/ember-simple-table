@@ -1,3 +1,4 @@
+import get from '@ember/object/get';
 import layout from '../templates/components/simple-table-header-selectable';
 import BaseHeaderRow from './simple-table-header-row';
 
@@ -9,11 +10,12 @@ export default BaseHeaderRow.extend({
 
   actions: {
     selectAll() {
-      let selectAllAction = this.get('selectAllAction');
+      let selectAllAction = get(this, 'selectAllAction');
       if (selectAllAction) {
         return selectAllAction();
       } else {
-        console.log('Set `selectAllAction` for simpleTableHeaderSelectable');
+        // TOOD: Better Ember warn
+        // console.warn('Set `selectAllAction` for simpleTableHeaderSelectable');
         return true;
       }
     }
