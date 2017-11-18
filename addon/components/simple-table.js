@@ -11,9 +11,11 @@ export default Component.extend({
 
   defaultSorting: null, // injected
 
+  tRows: sort('tData', 'sorting'),
+
   sortingCriteria: computed('tColumns', {
     get() {
-      let columns = this.get('tColumns');
+      let columns = get(this, 'tColumns');
       return columns.reduce((reducer, item) => {
         if (isArray(item)) {
           item.forEach((i) => {
@@ -29,7 +31,7 @@ export default Component.extend({
 
   sorting: computed('sortingCriteria.[]', 'tData.[]', 'defaultSorting', {
     get() {
-      let sortingCriteria = this.get('sortingCriteria')
+      let sortingCriteria = get(this, 'sortingCriteria')
         .filterBy('order')
         .map(({ key, order }) => `${key}:${order}`);
 
@@ -41,8 +43,6 @@ export default Component.extend({
       return sortingCriteria;
     }
   }),
-
-  tRows: sort('tData', 'sorting'),
 
   actions: {
     sortBy(key) {

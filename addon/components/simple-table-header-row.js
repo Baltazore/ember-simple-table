@@ -1,5 +1,6 @@
 import { A } from '@ember/array';
 import Component from '@ember/component';
+import get from '@ember/object/get';
 import layout from '../templates/components/simple-table-header-row';
 
 export default Component.extend({
@@ -10,8 +11,8 @@ export default Component.extend({
 
   actions: {
     sortBy(key) {
-      let sortAction = this.get('sortAction');
-      let sortBy     = this.get('sortBy');
+      let sortAction = get(this, 'sortAction');
+      let sortBy = get(this, 'sortBy');
 
       if (sortBy) {
         return sortBy(key);
