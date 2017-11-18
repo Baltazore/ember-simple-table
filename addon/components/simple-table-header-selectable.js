@@ -14,7 +14,7 @@ export default BaseHeaderRow.extend({
       if (selectAllAction) {
         return selectAllAction();
       } else {
-        // TOOD: Better Ember warn
+        // TODO: Better Ember warn
         // console.warn('Set `selectAllAction` for simpleTableHeaderSelectable');
         return true;
       }
