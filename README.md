@@ -1,4 +1,4 @@
-# Ember-simple-table
+# ember-simple-table
 
 This README outlines the details of collaborating on this Ember addon.
 
@@ -7,7 +7,6 @@ This README outlines the details of collaborating on this Ember addon.
 * `git clone <repository-url>` this repository
 * `cd ember-simple-table`
 * `npm install`
-* `bower install`
 
 ## Running
 
@@ -24,4 +23,4 @@ This README outlines the details of collaborating on this Ember addon.
 
 * `ember build`
 
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).

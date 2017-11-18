@@ -1,25 +1,28 @@
-import Ember from 'ember';
+import { htmlSafe } from '@ember/string';
+import { isArray } from '@ember/array';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from '../templates/components/simple-table-cell';
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'th',
 
   classNameBindings: ['columnsClass'],
   attributeBindings: ['rowspan', 'colspan', 'columnsStyle:style'],
 
-  columnsClass: Ember.computed('columns.classes', {
+  columnsClass: computed('columns.classes', {
     get() {
       let columns = this.get('columns');
-      let column = Ember.isArray(columns) ? columns[0] : columns;
-      return Ember.String.htmlSafe(column.classes);
+      let column = isArray(columns) ? columns[0] : columns;
+      return htmlSafe(column.classes);
     }
   }),
-  columnsStyle: Ember.computed('columns.style', {
+  columnsStyle: computed('columns.style', {
     get() {
       let columns = this.get('columns');
-      let column = Ember.isArray(columns) ? columns[0] : columns;
-      return Ember.String.htmlSafe(column.style);
+      let column = isArray(columns) ? columns[0] : columns;
+      return htmlSafe(column.style);
     }
   }),
 

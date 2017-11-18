@@ -1,14 +1,16 @@
-import Ember from 'ember';
+import { isArray } from '@ember/array';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from '../templates/components/simple-table-body';
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'tbody',
 
-  columnKeys: Ember.computed('columns', {
+  columnKeys: computed('columns', {
     get() {
       let columns = this.get('columns');
-      if (Ember.isArray(columns)) {
+      if (isArray(columns)) {
         if (columns[0].key) {
           return columns.map((item) => item.key);
         } else {
