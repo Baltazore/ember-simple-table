@@ -1,6 +1,6 @@
 import { A } from '@ember/array';
 import Component from '@ember/component';
-import get from '@ember/object/get';
+import { get } from '@ember/object';
 import layout from '../templates/components/simple-table-header-row';
 
 export default Component.extend({
