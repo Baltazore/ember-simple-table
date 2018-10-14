@@ -1,7 +1,7 @@
 ember-simple-table
 ==============================================================================
 
-[Short description of the addon.]
+Make composable tables with simple components structure.
 
 Installation
 ------------------------------------------------------------------------------
@@ -14,46 +14,13 @@ ember install ember-simple-table
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+Check docs pages [WIP]
 
 
 Contributing
 ------------------------------------------------------------------------------
 
-### Installation
-
-* `git clone <repository-url>`
-* `cd ember-simple-table`
-* `npm install`
-
-### Linting
-
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
-
-### Running tests
-
-<<<<<<< HEAD
-* `yarn test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-=======
-* `ember test` – Runs the test suite on the current Ember version
-* `ember test --server` – Runs the test suite in "watch mode"
-<<<<<<< HEAD
-* `npm test` – Runs `ember try:each` to test your addon against multiple Ember versions
->>>>>>> a133a31... message
-=======
-* `ember try:each` – Runs the test suite against multiple Ember versions
->>>>>>> 12002b7... message
-
-### Running the dummy application
-
-* `ember serve`
-* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+Check CONTIBUTE.MD for reference
 
 License
 ------------------------------------------------------------------------------
