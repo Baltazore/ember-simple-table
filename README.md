@@ -1,22 +1,13 @@
-<<<<<<< HEAD
-# ember-simple-table
-=======
-my-addon
+ember-simple-table
 ==============================================================================
->>>>>>> a133a31... message
 
 [Short description of the addon.]
 
 Installation
 ------------------------------------------------------------------------------
 
-<<<<<<< HEAD
-* `git clone <repository-url>` this repository
-* `cd ember-simple-table`
-* `yarn install`
-=======
 ```
-ember install my-addon
+ember install ember-simple-table
 ```
 
 
@@ -32,12 +23,12 @@ Contributing
 ### Installation
 
 * `git clone <repository-url>`
-* `cd my-addon`
+* `cd ember-simple-table`
 * `npm install`
->>>>>>> a133a31... message
 
 ### Linting
 
+* `npm run lint:hbs`
 * `npm run lint:js`
 * `npm run lint:js -- --fix`
 
@@ -50,8 +41,12 @@ Contributing
 =======
 * `ember test` – Runs the test suite on the current Ember version
 * `ember test --server` – Runs the test suite in "watch mode"
+<<<<<<< HEAD
 * `npm test` – Runs `ember try:each` to test your addon against multiple Ember versions
 >>>>>>> a133a31... message
+=======
+* `ember try:each` – Runs the test suite against multiple Ember versions
+>>>>>>> 12002b7... message
 
 ### Running the dummy application
 
