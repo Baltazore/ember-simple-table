@@ -1,24 +1,34 @@
 {{#if hasBlock}}
-  {{yield (hash
-    sort-row=(component "simple-table-sort-row"
-      criteria=sortingCriteria
-      removeSortOption=(action "removeSortOption")
-      reorderCriteria=(action "reorderCriteria")
+  {{yield
+    (hash
+      sort-row=(component "simple-table-sort-row"
+        criteria=sortingCriteria
+        removeSortOption=(action "removeSortOption")
+        reorderCriteria=(action "reorderCriteria")
+      )
+      header-row=(component "simple-table-header-row"
+        sortingCriteria=sortingCriteria
+        columns=tColumns
+        sortAction=(action "sortBy")
+      )
+      header-selectable=(component "simple-table-header-selectable"
+        sortingCriteria=sortingCriteria
+        columns=tColumns
+        sortAction=(action "sortBy")
+      )
+      body=(component "simple-table-body" columns=tColumns rows=tRows)
+      rows=tRows
     )
-    header-row=(component "simple-table-header-row"
-      sortingCriteria=sortingCriteria
-      columns=tColumns
-      sortAction=(action "sortBy")
-    )
-    header-selectable=(component "simple-table-header-selectable"
-      sortingCriteria=sortingCriteria
-      columns=tColumns
-      sortAction=(action "sortBy")
-    )
-    body=(component "simple-table-body" columns=tColumns rows=tRows)
-    rows=tRows
-  )}}
+  }}
 {{else}}
-  {{simple-table-header-row columns=tColumns sortingCriteria=sortingCriteria sortAction=(action "sortBy")}}
-  {{simple-table-body scroll=scroll columns=tColumns rows=tRows}}
+  {{simple-table-header-row
+    columns=tColumns
+    sortingCriteria=sortingCriteria
+    sortAction=(action "sortBy")
+  }}
+  {{simple-table-body
+    scroll=scroll
+    columns=tColumns
+    rows=tRows
+  }}
 {{/if}}

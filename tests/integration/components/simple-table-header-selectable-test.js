@@ -1,19 +1,21 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('simple-table-header-selectable', 'Integration | Component | simple table header selectable', {
-  integration: true
-});
+module('Integration | Component | simple table header selectable', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-  this.set('columns', [
-    { key: 'foo', name: 'Foo' },
-    { key: 'baz', name: 'Baz' }
-  ]);
+  test('it renders', async function(assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+    this.set('columns', [
+      { key: 'foo', name: 'Foo' },
+      { key: 'baz', name: 'Baz' }
+    ]);
 
-  this.render(hbs`{{simple-table-header-selectable columns=columns}}`);
+    await render(hbs`{{simple-table-header-selectable columns=columns}}`);
 
-  assert.notEqual(this.$().text().trim(), '');
+    assert.notEqual(find('thead').textContent.trim(), '');
+  });
 });

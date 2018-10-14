@@ -1,10 +1,16 @@
 {{#each columns as |column| }}
   {{#if hasBlock}}
-    {{yield (hash
-      column=(component "simple-table-cell" columns=column sortingCriteria=sortingCriteria sortAction=(action 'sortBy'))
-      )}}
+    {{yield
+      (hash
+        column=(component "simple-table-cell" columns=column sortingCriteria=sortingCriteria sortAction=(action "sortBy"))
+      )
+    }}
   {{else}}
-    {{simple-table-cell columns=column sortingCriteria=sortingCriteria sortAction=(action 'sortBy')}}
+    {{simple-table-cell
+      columns=column
+      sortingCriteria=sortingCriteria
+      sortAction=(action "sortBy")
+    }}
   {{/if}}
 
 {{/each}}

@@ -2,24 +2,19 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
   actions: {
-    sort(criteria) {
-      console.log('sorting with criteria', criteria);
+    sort() {
     },
 
-    sortFoo(criteria) {
-      console.log('sorting Foo column with criteria', criteria);
+    sortFoo() {
     },
 
-    sortBaz(criteria) {
-      console.log('sorting Baz column with criteria', criteria);
+    sortBaz() {
     },
 
     selectAllRows() {
-      console.log('All Rows Selected');
     },
 
-    selectRow(row) {
-      console.log(`Selected row ${row}`);
+    selectRow() {
     }
   }
 });
