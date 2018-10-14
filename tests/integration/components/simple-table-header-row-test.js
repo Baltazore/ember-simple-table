@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, findAll } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | simple table header row', function(hooks) {
@@ -65,7 +65,7 @@ module('Integration | Component | simple table header row', function(hooks) {
     assert.dom('.asc').doesNotExist('Initial sorting on each column not set');
     assert.dom('.desc').doesNotExist('Initial sorting on each column not set');
 
-    this.$('span:first').click();
-    this.$('span:last').click();
+    await click('span:first-child')
+    await click('span:last-child')
   });
 });

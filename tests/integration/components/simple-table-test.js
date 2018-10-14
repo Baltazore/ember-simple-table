@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll, find } from '@ember/test-helpers';
+import { render, click, findAll, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 const columnAsString = (elems) => elems.flatMap(e => e.textContent).join('');
@@ -23,18 +23,17 @@ module('Integration | Component | simple table', function(hooks) {
 
     await render(hbs`{{simple-table tData=tableData tColumns=tableColumns}}`);
 
-    assert.notEqual(find('table').textContent.trim(), '');
     assert.dom('table').exists({ count: 1 }, 'Creates table');
     assert.dom('thead').exists({ count: 1 }, 'Creates table header');
     assert.dom('tbody').exists({ count: 1 }, 'Creates table body');
 
     assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
-    assert.equal(this.$('th:first').text().trim(), 'Baz');
-    assert.equal(this.$('th:last').text().trim(), 'Foo');
+    assert.dom('th:first-child').hasText('Baz');
+    assert.dom('th:last-child').hasText('Foo');
 
     assert.dom('td').exists({ count: 4 }, 'Creates table cell');
-    assert.equal(this.$('td:first').text().trim(), 'boo1');
-    assert.equal(this.$('td:last').text().trim(), 'bar2');
+    assert.dom('tr:first-child td:first-child').hasText('boo1');
+    assert.dom('tr:last-child td:last-child').hasText('bar2');
   });
 
   test('it renders with simple data and yield table data', async function(assert) {
@@ -60,12 +59,12 @@ module('Integration | Component | simple table', function(hooks) {
     assert.dom('tbody').exists({ count: 1 }, 'Creates table body');
 
     assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
-    assert.equal(this.$('th:first').text().trim(), 'Baz');
-    assert.equal(this.$('th:last').text().trim(), 'Foo');
+    assert.dom('th:first-child').hasText('Baz');
+    assert.dom('th:last-child').hasText('Foo');
 
     assert.dom('td').exists({ count: 2 }, 'Creates table cell');
-    assert.equal(this.$('td:first').text().trim(), 'boo');
-    assert.equal(this.$('td:last').text().trim(), 'bar');
+    assert.dom('td:first-child').hasText('boo');
+    assert.dom('td:last-child').hasText('bar');
   });
 
   test('it renders with simple data and yield table data', async function(assert) {
@@ -99,12 +98,12 @@ module('Integration | Component | simple table', function(hooks) {
     assert.dom('tbody').exists({ count: 1 }, 'Creates table body');
 
     assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
-    assert.equal(this.$('th:first').text().trim(), 'Baz');
-    assert.equal(this.$('th:last').text().trim(), 'Foo');
+    assert.dom('th:first-child').hasText('Baz');
+    assert.dom('th:last-child').hasText('Foo');
 
     assert.dom('td').exists({ count: 2 }, 'Creates table cell');
-    assert.equal(this.$('td:first').text().trim(), 'boo');
-    assert.equal(this.$('td:last').text().trim(), 'bar');
+    assert.dom('td:first-child').hasText('boo');
+    assert.dom('td:last-child').hasText('bar');
   });
 
   test('it renders with simple data and apply AlltSorting', async function(assert) {
@@ -126,8 +125,8 @@ module('Integration | Component | simple table', function(hooks) {
     `);
 
     assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
-    assert.equal(this.$('th:first').text().trim(), 'Number');
-    assert.equal(this.$('th:last').text().trim(), 'String');
+    assert.dom('th:first-child').hasText('Number');
+    assert.dom('th:last-child').hasText('String');
 
     assert.equal(columnAsString(findAll('tbody td:nth-child(odd)')), '321', 'Sorted by Number desc');
     assert.equal(columnAsString(findAll('tbody td:nth-child(even)')), 'bcacababc', 'Not sorted by String');
@@ -152,18 +151,18 @@ module('Integration | Component | simple table', function(hooks) {
     `);
 
     assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
-    assert.equal(this.$('th:first').text().trim(), 'Number');
-    assert.equal(this.$('th:last').text().trim(), 'String');
+    assert.dom('th:first-child').hasText('Number');
+    assert.dom('th:last-child').hasText('String');
 
-    this.$('th:first span').click();
+    await click('th:first-child span');
     assert.equal(columnAsString(findAll('tbody td:nth-child(odd)')), '123', 'Sorted by Number asc');
     assert.equal(columnAsString(findAll('tbody td:nth-child(even)')), 'abccabbca', 'Not sorted by String');
 
-    this.$('th:last span').click();
+    await click('th:last-child span');
     assert.equal(columnAsString(findAll('tbody td:nth-child(odd)')), '123', 'Sorted by Number asc');
     assert.equal(columnAsString(findAll('tbody td:nth-child(even)')), 'abccabbca', 'Not sorted by String');
 
-    this.$('th:first span').click();
+    await click('th:first-child span');
     assert.equal(columnAsString(findAll('tbody td:nth-child(odd)')), '321', 'Sorted by Number desc');
     assert.equal(columnAsString(findAll('tbody td:nth-child(even)')), 'bcacababc', 'Sorted by String asc');
   });

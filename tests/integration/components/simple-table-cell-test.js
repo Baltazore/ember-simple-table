@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll, find } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | simple table cell', function(hooks) {
@@ -47,7 +47,7 @@ module('Integration | Component | simple table cell', function(hooks) {
 
     assert.dom('th').exists({ count: 1 }, 'Creates th cell');
     assert.dom('th span').exists({ count: 2 }, 'Creates 2 span in 1 cell');
-    assert.equal(this.$('th span:first').text().trim(), 'Baz');
-    assert.equal(this.$('th span:last').text().trim(), 'Foo');
+    assert.dom('th span:first-child').hasText('Baz');
+    assert.dom('th span:last-child').hasText('Foo');
   });
 });
