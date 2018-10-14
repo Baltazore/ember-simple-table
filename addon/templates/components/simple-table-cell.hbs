@@ -2,14 +2,26 @@
   {{#each columns as |column|}}
     {{#if (is-array column)}}
       <span class="simple-table-column-group">
-      {{#each column as |item| }}
-        {{simple-table-cell-item column=item criteria=sortingCriteria sortAction=(action "sortBy")}}
-      {{/each}}
+        {{#each column as |item| }}
+          {{simple-table-cell-item
+            column=item
+            criteria=sortingCriteria
+            sortAction=(action "sortBy")
+          }}
+        {{/each}}
       </span>
     {{else}}
-      {{simple-table-cell-item column=column criteria=sortingCriteria sortAction=(action "sortBy")}}
+      {{simple-table-cell-item
+        column=column
+        criteria=sortingCriteria
+        sortAction=(action "sortBy")
+      }}
     {{/if}}
   {{/each}}
 {{else}}
-  {{simple-table-cell-item column=columns criteria=sortingCriteria sortAction=(action "sortBy")}}
+  {{simple-table-cell-item
+    column=columns
+    criteria=sortingCriteria
+    sortAction=(action "sortBy")
+  }}
 {{/if}}
