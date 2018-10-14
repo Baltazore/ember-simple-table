@@ -24,15 +24,15 @@ module('Integration | Component | simple table', function(hooks) {
     await render(hbs`{{simple-table tData=tableData tColumns=tableColumns}}`);
 
     assert.notEqual(find('table').textContent.trim(), '');
-    assert.equal(findAll('table').length, 1, 'Creates table');
-    assert.equal(findAll('thead').length, 1, 'Creates table header');
-    assert.equal(findAll('tbody').length, 1, 'Creates table body');
+    assert.dom('table').exists({ count: 1 }, 'Creates table');
+    assert.dom('thead').exists({ count: 1 }, 'Creates table header');
+    assert.dom('tbody').exists({ count: 1 }, 'Creates table body');
 
-    assert.equal(findAll('th').length, 2, 'Creates table header cell');
+    assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
     assert.equal(this.$('th:first').text().trim(), 'Baz');
     assert.equal(this.$('th:last').text().trim(), 'Foo');
 
-    assert.equal(findAll('td').length, 4, 'Creates table cell');
+    assert.dom('td').exists({ count: 4 }, 'Creates table cell');
     assert.equal(this.$('td:first').text().trim(), 'boo1');
     assert.equal(this.$('td:last').text().trim(), 'bar2');
   });
@@ -55,15 +55,15 @@ module('Integration | Component | simple table', function(hooks) {
     `);
 
     assert.notEqual(find('table').textContent.trim(), '');
-    assert.equal(findAll('table').length, 1, 'Creates table');
-    assert.equal(findAll('thead').length, 1, 'Creates table header');
-    assert.equal(findAll('tbody').length, 1, 'Creates table body');
+    assert.dom('table').exists({ count: 1 }, 'Creates table');
+    assert.dom('thead').exists({ count: 1 }, 'Creates table header');
+    assert.dom('tbody').exists({ count: 1 }, 'Creates table body');
 
-    assert.equal(findAll('th').length, 2, 'Creates table header cell');
+    assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
     assert.equal(this.$('th:first').text().trim(), 'Baz');
     assert.equal(this.$('th:last').text().trim(), 'Foo');
 
-    assert.equal(findAll('td').length, 2, 'Creates table cell');
+    assert.dom('td').exists({ count: 2 }, 'Creates table cell');
     assert.equal(this.$('td:first').text().trim(), 'boo');
     assert.equal(this.$('td:last').text().trim(), 'bar');
   });
@@ -94,15 +94,15 @@ module('Integration | Component | simple table', function(hooks) {
     `);
 
     assert.notEqual(find('table').textContent.trim(), '');
-    assert.equal(findAll('table').length, 1, 'Creates table');
-    assert.equal(findAll('thead').length, 1, 'Creates table header');
-    assert.equal(findAll('tbody').length, 1, 'Creates table body');
+    assert.dom('table').exists({ count: 1 }, 'Creates table');
+    assert.dom('thead').exists({ count: 1 }, 'Creates table header');
+    assert.dom('tbody').exists({ count: 1 }, 'Creates table body');
 
-    assert.equal(findAll('th').length, 2, 'Creates table header cell');
+    assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
     assert.equal(this.$('th:first').text().trim(), 'Baz');
     assert.equal(this.$('th:last').text().trim(), 'Foo');
 
-    assert.equal(findAll('td').length, 2, 'Creates table cell');
+    assert.dom('td').exists({ count: 2 }, 'Creates table cell');
     assert.equal(this.$('td:first').text().trim(), 'boo');
     assert.equal(this.$('td:last').text().trim(), 'bar');
   });
@@ -125,7 +125,7 @@ module('Integration | Component | simple table', function(hooks) {
       {{simple-table tData=tableData tColumns=tableColumns defaultSorting='foo:desc' }}
     `);
 
-    assert.equal(findAll('th').length, 2, 'Creates table header cell');
+    assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
     assert.equal(this.$('th:first').text().trim(), 'Number');
     assert.equal(this.$('th:last').text().trim(), 'String');
 
@@ -151,7 +151,7 @@ module('Integration | Component | simple table', function(hooks) {
       {{simple-table tData=tableData tColumns=tableColumns }}
     `);
 
-    assert.equal(findAll('th').length, 2, 'Creates table header cell');
+    assert.dom('th').exists({ count: 2 }, 'Creates table header cell');
     assert.equal(this.$('th:first').text().trim(), 'Number');
     assert.equal(this.$('th:last').text().trim(), 'String');
 

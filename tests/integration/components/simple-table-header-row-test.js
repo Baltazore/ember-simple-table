@@ -21,7 +21,7 @@ module('Integration | Component | simple table header row', function(hooks) {
 
     await render(hbs`{{simple-table-header-row columns=columns}}`);
 
-    assert.equal(findAll('.sortable').length, 3, 'Creates 3 sortable class cells');
+    assert.dom('.sortable').exists({ count: 3 }, 'Creates 3 sortable class cells');
   });
 
   test('sortable column by default', async function(assert) {
@@ -37,9 +37,9 @@ module('Integration | Component | simple table header row', function(hooks) {
 
     await render(hbs`{{simple-table-header-row columns=columns sortAction=sortAction}}`);
 
-    assert.equal(findAll('.sortable').length, 1, 'Creates sortable class on cell');
-    assert.equal(findAll('.asc').length, 0, 'Initial sorting on column not set');
-    assert.equal(findAll('.desc').length, 0, 'Initial sorting on column not set');
+    assert.dom('.sortable').exists({ count: 1 }, 'Creates sortable class on cell');
+    assert.dom('.asc').doesNotExist('Initial sorting on column not set');
+    assert.dom('.desc').doesNotExist('Initial sorting on column not set');
 
     await click('span');
   });
@@ -61,9 +61,9 @@ module('Integration | Component | simple table header row', function(hooks) {
 
     await render(hbs`{{simple-table-header-row columns=columns sortAction=sortAction}}`);
 
-    assert.equal(findAll('.sortable').length, 2, 'Creates 2 sortable class cells');
-    assert.equal(findAll('.asc').length, 0, 'Initial sorting on each column not set');
-    assert.equal(findAll('.desc').length, 0, 'Initial sorting on each column not set');
+    assert.dom('.sortable').exists({ count: 2 }, 'Creates 2 sortable class cells');
+    assert.dom('.asc').doesNotExist('Initial sorting on each column not set');
+    assert.dom('.desc').doesNotExist('Initial sorting on each column not set');
 
     this.$('span:first').click();
     this.$('span:last').click();

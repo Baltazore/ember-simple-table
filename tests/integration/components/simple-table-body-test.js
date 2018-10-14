@@ -17,7 +17,7 @@ module('Integration | Component | simple table body', function(hooks) {
 
 
     assert.notEqual(find('tbody').textContent.trim(), '');
-    assert.equal(findAll('tbody').length, 1);
+    assert.dom('tbody').exists({ count: 1 });
   });
 
   test('it renders with block usage', async function(assert) {
@@ -36,7 +36,7 @@ module('Integration | Component | simple table body', function(hooks) {
     `);
 
     assert.notEqual(find('tbody').textContent.trim(), '');
-    assert.equal(findAll('tbody').length, 1);
+    assert.dom('tbody').exists({ count: 1 });
   });
 });
 

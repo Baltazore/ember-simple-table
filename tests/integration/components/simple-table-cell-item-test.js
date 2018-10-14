@@ -12,7 +12,7 @@ module('Integration | Component | simple table cell item', function(hooks) {
 
     await render(hbs`{{simple-table-cell-item}}`);
 
-    assert.equal(find('span').textContent.trim(), '');
+    assert.dom('span').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | simple table cell item', function(hooks) {
       {{/simple-table-cell-item}}
     `);
 
-    assert.equal(find('h1').textContent.trim(), 'template block text');
+    assert.dom('h1').hasText('template block text');
   });
 });

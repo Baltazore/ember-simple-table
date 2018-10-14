@@ -12,7 +12,7 @@ module('Integration | Component | simple table sort row', function(hooks) {
 
     await render(hbs`{{simple-table-sort-row}}`);
 
-    assert.equal(find('caption').textContent.trim(), '');
+    assert.dom('caption').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | simple table sort row', function(hooks) {
       {{/simple-table-sort-row}}
     `);
 
-    assert.equal(find('caption').textContent.trim(), 'template block text');
+    assert.dom('caption').hasText('template block text');
   });
 });

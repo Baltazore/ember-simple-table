@@ -24,7 +24,7 @@
     "ember-cli-babel": "^6.16.0",
     "ember-cli-htmlbars": "^3.0.0",
     "ember-composable-helpers": "^2.0.3",
-    "ember-scrollable": "^0.4.9",
+    "ember-scrollable": "^0.5.1",
     "ember-truth-helpers": "^2.0.0"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.1.0",
     "ember-cli": "~3.4.3",
-    "ember-cli-addon-docs": "ember-learn/ember-cli-addon-docs",
+    "ember-cli-addon-docs": "^0.6.0",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-eslint": "^4.2.3",
     "ember-cli-htmlbars-inline-precompile": "^1.0.3",
