@@ -1,4 +1,4 @@
-import get from '@ember/object/get';
+import { get } from '@ember/object';
 import layout from '../templates/components/simple-table-header-selectable';
 import BaseHeaderRow from './simple-table-header-row';
 
