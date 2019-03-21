@@ -3,6 +3,14 @@ ember-simple-table
 
 Make composable tables with simple components structure.
 
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v2.18 or above
+* Ember CLI v2.13 or above
+
+
 Installation
 ------------------------------------------------------------------------------
 
@@ -20,7 +28,8 @@ Check docs pages [WIP]
 Contributing
 ------------------------------------------------------------------------------
 
-Check CONTIBUTE.MD for reference
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
 
 License
 ------------------------------------------------------------------------------
